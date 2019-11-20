@@ -9,7 +9,7 @@ import retrofit2.http.POST;
 public interface RegisterApi {
     @FormUrlEncoded
     @POST("/register.php")
-    Call<Value> daftar        (@Field("username") String username,
-                               @Field("password") String password,
-                               @Field("nama") String nama);
+    Call<Value> daftar(@Field("username") String username,
+                       @Field("password") String password,
+                       @Field("nama") String nama);
 }

@@ -1,6 +1,6 @@
 package malang.paradise.com.malangparadise.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity;
 import malang.paradise.com.malangparadise.R;
 
 import android.content.Context;

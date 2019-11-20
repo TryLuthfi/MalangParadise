@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.getStarted">
+    tools:context=".activity.Register">
 
     <ImageView
         android:layout_marginLeft="-200dp"
@@ -39,15 +39,15 @@
         android:background="@drawable/btn_form"
         android:layout_height="50dp" >
 
-            <EditText
-                android:id="@+id/username"
-                android:gravity="center_vertical"
-                android:layout_marginHorizontal="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="15sp"
-                android:background="@null"
-                android:hint="Username" />
+        <EditText
+            android:id="@+id/nama"
+            android:gravity="center_vertical"
+            android:layout_marginHorizontal="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="15sp"
+            android:background="@null"
+            android:hint="Name" />
 
     </LinearLayout>
     <LinearLayout
@@ -56,6 +56,26 @@
         android:layout_marginHorizontal="20dp"
         android:layout_width="match_parent"
         android:layout_below="@id/satu"
+        android:background="@drawable/btn_form"
+        android:layout_height="50dp" >
+
+        <EditText
+            android:id="@+id/username"
+            android:gravity="center_vertical"
+            android:layout_marginHorizontal="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="15sp"
+            android:background="@null"
+            android:hint="Username" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:id="@+id/tiga"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_below="@id/dua"
         android:background="@drawable/btn_form"
         android:layout_height="50dp" >
 
@@ -72,30 +92,8 @@
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="15dp"
-        android:id="@+id/login"
-        android:layout_below="@id/dua"
-        android:layout_marginHorizontal="20dp"
-        android:layout_width="match_parent"
-        android:layout_centerInParent="true"
-        android:background="@drawable/btn_getstarted"
-        android:layout_height="50dp" >
-
-        <TextView
-            android:gravity="center"
-            android:layout_marginHorizontal="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="#fff"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:text="LOGIN" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginTop="15dp"
         android:id="@+id/register"
-        android:layout_below="@id/login"
+        android:layout_below="@id/tiga"
         android:layout_marginHorizontal="20dp"
         android:layout_width="match_parent"
         android:layout_centerInParent="true"

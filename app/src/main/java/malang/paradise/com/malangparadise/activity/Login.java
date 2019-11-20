@@ -1,6 +1,5 @@
 package malang.paradise.com.malangparadise.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import malang.paradise.com.malangparadise.R;
 import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
 
@@ -9,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -27,6 +27,7 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
     private LinearLayout login;
+    private LinearLayout register;
     private EditText usernameE;
     private EditText passwordE;
     private ProgressDialog progressDialog;
@@ -45,11 +46,20 @@ public class Login extends AppCompatActivity {
         usernameE = findViewById(R.id.username);
         passwordE = findViewById(R.id.password);
         login = findViewById(R.id.login);
+        register = findViewById(R.id.register);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
+            }
+        });
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Register.class);
+                startActivity(intent);
             }
         });
     }

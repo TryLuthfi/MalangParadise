@@ -1,9 +1,9 @@
 package malang.paradise.com.malangparadise.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import malang.paradise.com.malangparadise.R;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 public class HomePage extends AppCompatActivity {
 
