@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="52dp"
         android:orientation="horizontal"
         android:background="@color/colorPrimary">
 
@@ -19,8 +19,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:layout_weight="3"
-            android:gravity="center"
-            android:padding="12dp">
+            android:gravity="center">
 
             <ImageView
                 android:layout_width="24dp"
@@ -43,34 +42,35 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/background"
+        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerInParent="true">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageProfile"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
-            android:background="@drawable/background"
-            android:layout_marginVertical="4dp"/>
+            android:layout_marginVertical="10dp"/>
 
         <TextView
-            android:layout_marginVertical="4dp"
+            android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
             android:layout_gravity="center"
-            android:textSize="24dp"/>
+            android:textSize="16dp"/>
 
         <TextView
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Username"
             android:textStyle="bold"
             android:layout_gravity="center"
-            android:textSize="24dp"
-            android:layout_marginVertical="4dp"/>
+            android:textSize="20dp"
+            android:layout_marginBottom="8dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,6 +93,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/buttonLogOut"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginHorizontal="20dp"
@@ -112,6 +113,20 @@
 
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="#a69393"
+            android:id="@+id/loading"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -125,7 +125,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void gotoCourseActivity() {
-        Intent intent = new Intent(getApplicationContext(), Profile.class);
+        Intent intent = new Intent(getApplicationContext(), HomePage.class);
         startActivity(intent);
         finish();
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);

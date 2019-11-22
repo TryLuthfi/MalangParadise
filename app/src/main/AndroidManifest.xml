@@ -15,8 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.Register"></activity>
-        <activity android:name=".activity.HomePage" />
+        <activity android:name=".activity.HomePage"/>
         <activity android:name=".activity.Login" />
+        <activity android:name=".activity.Profile"/>
         <activity android:name=".activity.getStarted">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
