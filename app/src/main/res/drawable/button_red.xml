@@ -8,15 +8,15 @@
         android:topRightRadius="50dp"
         android:radius="50dp" />
 
-    <size
-        android:width="10dp"
-        android:height="10dp" />
+    <!--    <size-->
+    <!--        android:width="10dp"-->
+    <!--        android:height="10dp" />-->
 
-    <stroke
-        android:width="2dp"
-        android:color="#ffa801" />
+    <!--    <stroke-->
+    <!--        android:width="2dp"-->
+    <!--        android:color="#D32F2F" />-->
 
     <solid
-        android:color="#ffa801" />
+        android:color="@color/colorDanger" />
 
 </shape>

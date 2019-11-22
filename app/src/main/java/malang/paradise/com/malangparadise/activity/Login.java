@@ -77,7 +77,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        Log.e("idpelangan",response.toString());
+//                        Log.e("idpelangan",response.toString());
                         if (response.contains(konfigurasi.LOGIN_SUCCESS)) {
                             hideDialog();
                             String id_user = response.toString().split(";")[1];
@@ -125,7 +125,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void gotoCourseActivity() {
-        Intent intent = new Intent(getApplicationContext(), HomePage.class);
+        Intent intent = new Intent(getApplicationContext(), Profile.class);
         startActivity(intent);
         finish();
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
