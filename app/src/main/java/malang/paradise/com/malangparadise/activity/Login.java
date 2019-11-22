@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
     private LinearLayout login;
-    private LinearLayout register;
+    private TextView register;
     private EditText usernameE;
     private EditText passwordE;
     private ProgressDialog progressDialog;
