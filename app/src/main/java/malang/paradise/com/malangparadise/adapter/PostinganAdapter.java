@@ -48,10 +48,10 @@ public class PostinganAdapter extends RecyclerView.Adapter<PostinganAdapter.Prod
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background);
 
-        Glide.with(Objects.requireNonNull(mCtx)).load("http://malang-paradise.000webhostapp.com/pendakian/" + postingan.getGambar()).apply(requestOptions).into(holder.gambar);
+        Glide.with(Objects.requireNonNull(mCtx)).load("http://malang-paradise.000webhostapp.com/pendakian/" + postingan.getGambar()) .apply(requestOptions).into(holder.gambar);
         holder.nama.setText(postingan.getNama());
 
-    }
+     }
 
     @Override
     public int getItemCount() {
