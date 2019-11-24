@@ -6,10 +6,13 @@ import malang.paradise.com.malangparadise.adapter.PostinganAdapter;
 import malang.paradise.com.malangparadise.json.Kategori;
 import malang.paradise.com.malangparadise.json.Postingan;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -38,6 +41,10 @@ public class HomePage extends AppCompatActivity {
     RecyclerView recyclerViewPostingan;
     private String JSON_STRING;
     private ProgressBar loading;
+
+    private static final int PERIOD = 2000;
+    private long lastPressedTime;
+//    boolean doubleBackToExitPressedOnce = false;
 
     private LinearLayout profile;
     private LinearLayout search;
@@ -71,6 +78,32 @@ public class HomePage extends AppCompatActivity {
 
         loadKategori();
         loadPostingan();
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Profile.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            switch (event.getAction()) {
+                case KeyEvent.ACTION_DOWN:
+                    if (event.getDownTime() - lastPressedTime < PERIOD) {
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Tekan sekali lagi untuk keluar dari Aplikasi.",
+                                Toast.LENGTH_SHORT).show();
+                        lastPressedTime = event.getEventTime();
+                    }
+                    return true;
+            }
+        }
+        return false;
     }
 
     private void loadPostingan() {
