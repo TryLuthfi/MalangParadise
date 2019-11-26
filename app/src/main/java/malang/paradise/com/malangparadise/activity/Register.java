@@ -43,8 +43,6 @@ public class Register extends AppCompatActivity {
         LayoutInflater inflater = LayoutInflater.from(Register.this);
         final View vv = inflater.inflate(R.layout.activity_register, null);
 
-        Utils.darkenStatusBar(this,R.color.colorPrimary);
-
         String namaS  = nama.getText().toString();
         String usernameS  = username.getText().toString();
         String passwordS  = password.getText().toString();
@@ -89,6 +87,8 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
+
+        Utils.darkenStatusBar(this,R.color.colorPrimary);
 
         register = findViewById(R.id.register);
     }

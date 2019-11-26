@@ -14,11 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.Register"></activity>
-        <activity android:name=".activity.HomePage"/>
+        <activity android:name=".activity.EditProfile"></activity>
+        <activity android:name=".activity.Register" />
+        <activity android:name=".activity.HomePage" />
         <activity android:name=".activity.Login" />
-        <activity android:name=".activity.Profile"/>
-        <activity android:name=".activity.getStarted">
+        <activity android:name=".activity.Profile" />
+        <activity
+            android:name=".activity.getStarted"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

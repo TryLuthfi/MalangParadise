@@ -32,12 +32,11 @@ import malang.paradise.com.malangparadise.request.RequestHandler;
 public class Profile extends AppCompatActivity {
 
     ProgressBar loading;
-    LinearLayout backButton,buttonLogOut,background;
+    LinearLayout backButton,buttonLogOut,background,edit_profile;
     CircleImageView imageProfile;
     TextView username,name;
     public static String  gambarIntent;
 
-//    String id_userS,usernameS,namaS,passwordS,imageS;
     private String mPostKeyId = null, mPostkeyUsername = null, mPostKeyNama = null,
         mPostKeyPassword = null, mPostKeyImage = null;
     private String JSON_STRING;
@@ -46,6 +45,8 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        Utils.darkenStatusBar(this,R.color.colorPrimary);
 
         mPostKeyId = getIntent().getExtras().getString("id_user");
         mPostkeyUsername = getIntent().getExtras().getString("username");
@@ -60,6 +61,7 @@ public class Profile extends AppCompatActivity {
         username = findViewById(R.id.username);
         name = findViewById(R.id.name);
         loading = findViewById(R.id.loading);
+        edit_profile = findViewById(R.id.edit_profile);
 
         RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.ic_launcher_background);
 
@@ -74,6 +76,20 @@ public class Profile extends AppCompatActivity {
                 SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
                 preferences.edit().clear().commit();
                 Intent intent = new Intent(getApplicationContext(),Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        edit_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),EditProfile.class);
+                intent.putExtra("id_userI",mPostKeyId);
+                intent.putExtra("usernameI",mPostkeyUsername);
+                intent.putExtra("nameI",mPostKeyNama);
+                intent.putExtra("passwordI",mPostKeyPassword);
+                intent.putExtra("imageI",mPostKeyImage);
                 startActivity(intent);
                 finish();
             }
