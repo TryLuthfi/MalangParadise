@@ -23,9 +23,9 @@
             android:gravity="center">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:background="@drawable/profileicon" />
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/user" />
         </LinearLayout>
 
         <LinearLayout
@@ -60,8 +60,8 @@
             android:gravity="center">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:background="@drawable/search" />
         </LinearLayout>
 
