@@ -44,7 +44,6 @@ public class HomePage extends AppCompatActivity {
 
     private static final int PERIOD = 2000;
     private long lastPressedTime;
-//    boolean doubleBackToExitPressedOnce = false;
 
     private LinearLayout profile;
     private LinearLayout search;
@@ -53,6 +52,8 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        Utils.darkenStatusBar(this,R.color.colorPrimary);
 
         profile = findViewById(R.id.profile);
         search = findViewById(R.id.search);

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -41,6 +42,8 @@ public class Register extends AppCompatActivity {
         final AlertDialog.Builder dialog = new AlertDialog.Builder(new ContextThemeWrapper(Register.this, android.R.style.Theme_DeviceDefault_Light_Dialog));
         LayoutInflater inflater = LayoutInflater.from(Register.this);
         final View vv = inflater.inflate(R.layout.activity_register, null);
+
+        Utils.darkenStatusBar(this,R.color.colorPrimary);
 
         String namaS  = nama.getText().toString();
         String usernameS  = username.getText().toString();

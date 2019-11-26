@@ -6,29 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".activity.getStarted">
 
-    <ImageView
-        android:layout_marginLeft="-200dp"
-        android:layout_marginRight="-50dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background" />
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="@drawable/backgroundapp" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="#85000000"
+        android:background="@color/colorPrimary"
         android:layout_height="match_parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="80dp"
         android:gravity="center"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_height="wrap_content" >
 
-        <ImageView
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:background="@drawable/logomalangparadise"-->
+<!--            android:layout_height="wrap_content" />-->
+        <TextView
             android:layout_width="wrap_content"
-            android:background="@drawable/logomalangparadise"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Malang"
+            android:fontFamily="@font/alatsi_regular"
+            android:textSize="42dp"
+            android:textColor="@color/colorBlue"
+            android:gravity="center"
+            android:layout_margin="4dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paradise"
+            android:textSize="42dp"
+            android:fontFamily="@font/alatsi_regular"
+            android:textColor="@color/colorAccent"
+            android:layout_margin="4dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -36,10 +51,12 @@
         android:layout_marginHorizontal="20dp"
         android:layout_width="match_parent"
         android:layout_centerInParent="true"
-        android:background="@drawable/btn_form"
+        android:background="@drawable/form"
         android:layout_height="50dp" >
 
             <EditText
+                android:maxEms="1"
+                android:inputType="text"
                 android:id="@+id/username"
                 android:gravity="center_vertical"
                 android:layout_marginHorizontal="20dp"
@@ -56,10 +73,12 @@
         android:layout_marginHorizontal="20dp"
         android:layout_width="match_parent"
         android:layout_below="@id/satu"
-        android:background="@drawable/btn_form"
+        android:background="@drawable/form"
         android:layout_height="50dp" >
 
         <EditText
+            android:maxEms="1"
+            android:inputType="textPassword"
             android:id="@+id/password"
             android:gravity="center_vertical"
             android:layout_marginHorizontal="20dp"
@@ -77,7 +96,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_width="match_parent"
         android:layout_centerInParent="true"
-        android:background="@drawable/btn_getstarted"
+        android:background="@drawable/button_yellow"
         android:layout_height="50dp" >
 
         <TextView
@@ -88,39 +107,37 @@
             android:textColor="#fff"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:text="LOGIN" />
+            android:text="L O G  I N"/>
 
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_marginBottom="50dp"
         android:layout_alignParentBottom="true"
         android:id="@+id/signup"
         android:layout_width="match_parent"
-        android:gravity="center"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="30dp"
-        android:orientation="horizontal"
+        android:padding="2dp"
         android:layout_height="wrap_content">
 
         <TextView
-            android:textColor="#fff"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_width="match_parent"
+            android:textColor="#202020"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="8dp"
             android:text="Don't Have an account?"/>
 
         <TextView
+            android:paddingHorizontal="8dp"
             android:id="@+id/register"
             android:textStyle="bold"
-            android:layout_width="match_parent"
-            android:textColor="#FFC107"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:textColor="@color/colorAccent"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:text="Sign Up"/>
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </RelativeLayout>

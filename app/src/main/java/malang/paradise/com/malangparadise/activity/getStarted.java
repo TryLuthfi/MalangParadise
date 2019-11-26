@@ -2,6 +2,7 @@ package malang.paradise.com.malangparadise.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import malang.paradise.com.malangparadise.R;
+import okhttp3.internal.Util;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +18,8 @@ public class getStarted extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getstarted);
+
+        Utils.darkenStatusBar(this,R.color.colorPrimary);
 
         String id_user = getIdUser();
         if (id_user != "null") {

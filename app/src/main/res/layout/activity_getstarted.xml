@@ -6,16 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".activity.getStarted">
 
-    <ImageView
-        android:layout_marginLeft="-200dp"
-        android:layout_marginRight="-50dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background" />
+<!--    <ImageView-->
+<!--        android:layout_marginLeft="-200dp"-->
+<!--        android:layout_marginRight="-50dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="@drawable/background" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="#85000000"
+        android:background="@color/colorPrimary"
         android:layout_height="match_parent" />
 
     <LinearLayout
@@ -25,10 +25,34 @@
         android:orientation="vertical"
         android:layout_height="wrap_content" >
 
-        <ImageView
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:background="@drawable/logomalangparadise"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Malang"
+                android:fontFamily="@font/alatsi_regular"
+                android:textSize="42dp"
+                android:textColor="@color/colorBlue"
+                android:gravity="center"
+                android:layout_margin="4dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Paradise"
+                android:textSize="42dp"
+                android:fontFamily="@font/alatsi_regular"
+                android:textColor="@color/colorAccent"
+                android:layout_margin="4dp"/>
+
+        </LinearLayout>
+
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:background="@drawable/logomalangparadise"-->
+<!--            android:layout_height="wrap_content" />-->
 
         <TextView
             android:layout_marginTop="10dp"
@@ -36,8 +60,10 @@
             android:textSize="20sp"
             android:layout_width="wrap_content"
             android:text="Best place for holiday"
-            android:textColor="#ffffff"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <RelativeLayout
@@ -61,7 +87,7 @@
                 android:textColor="#fff"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:text="GET STARTED" />
+                android:text="G E T   S T A R T E D" />
         </LinearLayout>
 
     </RelativeLayout>

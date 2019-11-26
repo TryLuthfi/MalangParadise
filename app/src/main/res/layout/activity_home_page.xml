@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="#F7F2F2"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -34,12 +34,29 @@
             android:layout_weight="1"
             android:gravity="center">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="40dp"
-                android:layout_marginVertical="15dp"
-                android:background="@drawable/logotop" />
+<!--            <ImageView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginHorizontal="40dp"-->
+<!--                android:layout_marginVertical="15dp"-->
+<!--                android:background="@drawable/logotop" />-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Malang"
+                android:fontFamily="@font/alatsi_regular"
+                android:textSize="24dp"
+                android:textColor="@color/colorBlue"
+                android:gravity="center"
+                android:layout_margin="4dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Paradise"
+                android:textSize="24dp"
+                android:fontFamily="@font/alatsi_regular"
+                android:textColor="@color/colorAccent"
+                android:layout_margin="4dp"/>
         </LinearLayout>
 
         <LinearLayout

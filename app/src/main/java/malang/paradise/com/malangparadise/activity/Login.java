@@ -3,14 +3,18 @@ package malang.paradise.com.malangparadise.activity;
 import malang.paradise.com.malangparadise.R;
 import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
 
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,6 +41,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Utils.darkenStatusBar(this,R.color.colorPrimary);
 
         String id_user = getIdUser();
         if (id_user != "null") {

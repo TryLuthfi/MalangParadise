@@ -6,40 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".activity.Register">
 
-    <ImageView
-        android:layout_marginLeft="-200dp"
-        android:layout_marginRight="-50dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background" />
+<!--    <ImageView-->
+<!--        android:layout_marginLeft="-200dp"-->
+<!--        android:layout_marginRight="-50dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="@drawable/background" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="#85000000"
+        android:background="@color/colorPrimary"
         android:layout_height="match_parent" />
 
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_marginTop="70dp"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_height="wrap_content" >-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:background="@drawable/logomalangparadise"-->
+<!--            android:layout_height="wrap_content" />-->
+<!--    </LinearLayout>-->
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="80dp"
         android:gravity="center"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_height="wrap_content" >
 
-        <ImageView
+        <!--        <ImageView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:background="@drawable/logomalangparadise"-->
+        <!--            android:layout_height="wrap_content" />-->
+        <TextView
             android:layout_width="wrap_content"
-            android:background="@drawable/logomalangparadise"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Malang"
+            android:fontFamily="@font/alatsi_regular"
+            android:textSize="42dp"
+            android:textColor="@color/colorBlue"
+            android:gravity="center"
+            android:layout_margin="4dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paradise"
+            android:textSize="42dp"
+            android:fontFamily="@font/alatsi_regular"
+            android:textColor="@color/colorAccent"
+            android:layout_margin="4dp"/>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/satu"
         android:layout_marginHorizontal="20dp"
         android:layout_width="match_parent"
-        android:layout_centerInParent="true"
-        android:background="@drawable/btn_form"
+        android:layout_above="@+id/dua"
+        android:background="@drawable/form"
         android:layout_height="50dp" >
 
         <EditText
+            android:ems="1"
+            android:inputType="text"
             android:id="@+id/nama"
             android:gravity="center_vertical"
             android:layout_marginHorizontal="20dp"
@@ -55,11 +87,13 @@
         android:id="@+id/dua"
         android:layout_marginHorizontal="20dp"
         android:layout_width="match_parent"
-        android:layout_below="@id/satu"
-        android:background="@drawable/btn_form"
+        android:layout_centerInParent="true"
+        android:background="@drawable/form"
         android:layout_height="50dp" >
 
         <EditText
+            android:ems="1"
+            android:inputType="text"
             android:id="@+id/username"
             android:gravity="center_vertical"
             android:layout_marginHorizontal="20dp"
@@ -76,10 +110,12 @@
         android:layout_marginHorizontal="20dp"
         android:layout_width="match_parent"
         android:layout_below="@id/dua"
-        android:background="@drawable/btn_form"
+        android:background="@drawable/form"
         android:layout_height="50dp" >
 
         <EditText
+            android:ems="1"
+            android:inputType="textPassword"
             android:id="@+id/password"
             android:gravity="center_vertical"
             android:layout_marginHorizontal="20dp"
@@ -97,7 +133,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_width="match_parent"
         android:layout_centerInParent="true"
-        android:background="@drawable/btn_getstarted"
+        android:background="@drawable/button_yellow"
         android:layout_height="50dp" >
 
         <TextView
@@ -108,9 +144,8 @@
             android:textColor="#fff"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:text="LOGIN" />
+            android:text="R E G I S T E R" />
 
     </LinearLayout>
-
 
 </RelativeLayout>
