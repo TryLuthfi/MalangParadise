@@ -3,7 +3,7 @@ package malang.paradise.com.malangparadise.activity;
 import malang.paradise.com.malangparadise.R;
 import malang.paradise.com.malangparadise.adapter.KategoriAdapter;
 import malang.paradise.com.malangparadise.fragment.AllFragment;
-import malang.paradise.com.malangparadise.fragment.PendakianFragment;
+import malang.paradise.com.malangparadise.fragment.KategoriFragment;
 import malang.paradise.com.malangparadise.inteface.RecyclerViewListClicked;
 import malang.paradise.com.malangparadise.json.Kategori;
 import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
@@ -264,14 +264,23 @@ public class HomePage extends AppCompatActivity implements RecyclerViewListClick
         } else if(kategoriList.get(position).getNama().equals("Pendakian")){
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id. frame_container , new PendakianFragment());
+            fragmentTransaction.replace(R.id. frame_container , new KategoriFragment());
             fragmentTransaction.commit();
         } else if (kategoriList.get(position).getNama().equals("Pemandian")){
-            Toast.makeText(this, "ndii", Toast.LENGTH_SHORT).show();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id. frame_container , new KategoriFragment());
+            fragmentTransaction.commit();
         } else if (kategoriList.get(position).getNama().equals("Edukasi")){
-            Toast.makeText(this, "kaaa", Toast.LENGTH_SHORT).show();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id. frame_container , new KategoriFragment());
+            fragmentTransaction.commit();
         } else if (kategoriList.get(position).getNama().equals("Makanan")){
-            Toast.makeText(this, "kannn", Toast.LENGTH_SHORT).show();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id. frame_container , new KategoriFragment());
+            fragmentTransaction.commit();
         }
     }
 }
