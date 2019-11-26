@@ -33,7 +33,7 @@ import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PendakianFragment extends Fragment {
+public class KategoriFragment extends Fragment {
     List<Postingan> postinganList;
     RecyclerView recyclerViewPostingan;
     View view;
@@ -41,7 +41,7 @@ public class PendakianFragment extends Fragment {
     private String namaIntent;
 
 
-    public PendakianFragment() {
+    public KategoriFragment() {
         // Required empty public constructor
     }
 
