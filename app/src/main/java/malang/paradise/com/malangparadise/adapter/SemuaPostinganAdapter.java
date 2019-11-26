@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -20,7 +21,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import malang.paradise.com.malangparadise.R;
 import malang.paradise.com.malangparadise.json.Postingan;
 
-public class PostinganAdapter extends RecyclerView.Adapter<PostinganAdapter.ProductViewHolder>{
+public class SemuaPostinganAdapter extends RecyclerView.Adapter<SemuaPostinganAdapter.ProductViewHolder>{
     private static final String TAG = "PostinganAdapter";
 
     private Activity mCtx;
@@ -29,7 +30,7 @@ public class PostinganAdapter extends RecyclerView.Adapter<PostinganAdapter.Prod
     String id_content;
     DownloadManager downloadManager;
 
-    public PostinganAdapter(Activity mCtx, List<Postingan> postinganList) {
+    public SemuaPostinganAdapter(Activity mCtx, List<Postingan> postinganList) {
         this.mCtx = mCtx;
         this.postinganList = postinganList;
 
@@ -48,10 +49,10 @@ public class PostinganAdapter extends RecyclerView.Adapter<PostinganAdapter.Prod
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background);
 
-        Glide.with(Objects.requireNonNull(mCtx)).load("http://malang-paradise.000webhostapp.com/pendakian/" + postingan.getGambar()).apply(requestOptions).into(holder.gambar);
+        Glide.with(Objects.requireNonNull(mCtx)).load("http://malang-paradise.000webhostapp.com/" + postingan.getGambar()).apply(requestOptions).into(holder.gambar);
         holder.nama.setText(postingan.getNama());
 
-    }
+     }
 
     @Override
     public int getItemCount() {

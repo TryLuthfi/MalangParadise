@@ -74,70 +74,73 @@
 
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_below="@id/header"
-        android:layout_height="wrap_content" >
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
-        <LinearLayout
-            android:id="@+id/rcyclr"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="horizontal">
-
-            <HorizontalScrollView
-                android:scrollbars="none"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <android.support.v7.widget.RecyclerView
-                    android:paddingLeft="10dp"
-                    android:id="@+id/kategorirRecyclerView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </HorizontalScrollView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:id="@+id/line"
-            android:background="#4B000000"
-            android:layout_width="match_parent"
-            android:layout_below="@id/rcyclr"
-            android:layout_height="1dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_below="@id/line"
-            android:layout_height="wrap_content" >
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/postingantRecyler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </LinearLayout>
-    </ScrollView>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="match_parent">
+        android:gravity="center">
 
         <ProgressBar
-            android:indeterminate="true"
-            android:indeterminateTintMode="src_atop"
-            android:indeterminateTint="#a69393"
             android:id="@+id/loading"
             android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_height="50dp"
+            android:indeterminate="true"
+            android:indeterminateTint="#a69393"
+            android:indeterminateTintMode="src_atop" />
     </LinearLayout>
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/rcyclr"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/kategorirRecyclerView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp" />
+                </HorizontalScrollView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/rcyclr"
+                android:background="#4B000000"
+                android:orientation="vertical"
+                android:visibility="invisible" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/line"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/frame_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
 </RelativeLayout>

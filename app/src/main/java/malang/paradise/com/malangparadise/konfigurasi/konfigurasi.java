@@ -8,6 +8,8 @@ public class konfigurasi {
     public static final String PROFILE_IMAGE_URL = "http://malang-paradise.000webhostapp.com/Profile%20Image/";
     public static final String LOGIN_URL = "https://malang-paradise.000webhostapp.com/login.php";
     public static final String URL_GET_DATAUSER = "http://malang-paradise.000webhostapp.com/datauser.php";
+    public static final String URL_PRODUCTS_KATEGORI = "https://malang-paradise.000webhostapp.com/kategori.php";
+    public static final String URL_PRODUCTS_POSTINGAN = "https://malang-paradise.000webhostapp.com/postingan.php";
 
     public static final String TAG_JSON_ARRAY = "datauser";
 }
