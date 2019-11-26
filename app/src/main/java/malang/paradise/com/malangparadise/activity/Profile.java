@@ -35,15 +35,23 @@ public class Profile extends AppCompatActivity {
     LinearLayout backButton,buttonLogOut,background;
     CircleImageView imageProfile;
     TextView username,name;
+    public static String  gambarIntent;
 
-    String id_userS,usernameS,namaS,passwordS,imageS;
-
+//    String id_userS,usernameS,namaS,passwordS,imageS;
+    private String mPostKeyId = null, mPostkeyUsername = null, mPostKeyNama = null,
+        mPostKeyPassword = null, mPostKeyImage = null;
     private String JSON_STRING;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        mPostKeyId = getIntent().getExtras().getString("id_user");
+        mPostkeyUsername = getIntent().getExtras().getString("username");
+        mPostKeyNama = getIntent().getExtras().getString("nama");
+        mPostKeyPassword = getIntent().getExtras().getString("password");
+        mPostKeyImage = getIntent().getExtras().getString("image");
 
         background = findViewById(R.id.background);
         backButton = findViewById(R.id.backButton);
@@ -53,7 +61,12 @@ public class Profile extends AppCompatActivity {
         name = findViewById(R.id.name);
         loading = findViewById(R.id.loading);
 
-        getJSON();
+        RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.ic_launcher_background);
+
+        username.setText(mPostkeyUsername);
+        name.setText(mPostKeyNama);
+        Glide.with(getApplicationContext()).load(konfigurasi.PROFILE_IMAGE_URL+mPostKeyImage).apply(requestOptions).into(imageProfile);
+
 
         buttonLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,79 +87,6 @@ public class Profile extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    private void getJSON() {
-
-        class getJSON extends AsyncTask<Void,Void,String>{
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                JSON_STRING = s;
-                showData();
-            }
-
-            @Override
-            protected String doInBackground(Void... params) {
-                RequestHandler rh = new RequestHandler();
-                String s = rh.sendGetRequest(konfigurasi.URL_GET_DATAUSER);
-                return s;
-            }
-        }
-        getJSON gj = new getJSON();
-        gj.execute();
-    }
-
-    private void showData() {
-        JSONObject jsonObject = null;
-        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
-        try {
-            jsonObject = new JSONObject(JSON_STRING);
-            JSONArray result = jsonObject.getJSONArray(konfigurasi.TAG_JSON_ARRAY);
-
-            for (int i = 0 ; i < result.length(); i++){
-                JSONObject jo = result.getJSONObject(i);
-                id_userS = jo.getString("id_user");
-                usernameS = jo.getString("username");
-                namaS = jo.getString("nama");
-                passwordS = jo.getString("password");
-                imageS = jo.getString("image");
-
-                HashMap<String,String> data = new HashMap<>();
-
-                data.put("id_user",id_userS);
-
-                list.add(data);
-
-                String id_user = getIdUser();
-
-                RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.ic_launcher_background);
-
-                if(id_user.equals(id_userS)){
-                    username.setText(usernameS);
-                    name.setText(namaS);
-                    Glide.with(getApplicationContext()).load(konfigurasi.PROFILE_IMAGE_URL+imageS).apply(requestOptions).into(imageProfile);
-                }
-
-                background.setVisibility(View.VISIBLE);
-                loading.setVisibility(View.INVISIBLE);
-
-            }
-        }catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String getIdUser(){
-        SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
-        String id_user = preferences.getString("id_user", "null");
-        return id_user;
     }
 
     @Override

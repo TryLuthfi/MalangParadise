@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -16,10 +17,17 @@ import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import malang.paradise.com.malangparadise.R;
+import malang.paradise.com.malangparadise.inteface.RecyclerViewListClicked;
 import malang.paradise.com.malangparadise.json.Kategori;
+import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
+
+import static malang.paradise.com.malangparadise.activity.HomePage.imagee;
 
 public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.ProductViewHolder>{
+
     private static final String TAG = "KategoriAdapter";
+
+    private static RecyclerViewListClicked itemListener;
 
     private Activity mCtx;
     private List<Kategori> kategoriList;
@@ -27,9 +35,10 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.Produc
     String id_content;
     DownloadManager downloadManager;
 
-    public KategoriAdapter(Activity mCtx, List<Kategori> kategoriList) {
+    public KategoriAdapter(Activity mCtx, List<Kategori> kategoriList, RecyclerViewListClicked itemListener) {
         this.mCtx = mCtx;
         this.kategoriList = kategoriList;
+        this.itemListener = itemListener;
 
     }
 
@@ -41,13 +50,24 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.Produc
     }
 
     @Override
-    public void onBindViewHolder(final ProductViewHolder holder, int position) {
+    public void onBindViewHolder(final ProductViewHolder holder, final int position) {
         final Kategori kategori = kategoriList.get(position);
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background);
 
-        Glide.with(Objects.requireNonNull(mCtx)).load("https://malang-paradise.000webhostapp.com/kategori/kategori-" + kategori.getGambar()).apply(requestOptions).into(holder.gambar);
+        if(kategori.getNama().equals("Semua")){
+            Glide.with(Objects.requireNonNull(mCtx)).load(konfigurasi.PROFILE_IMAGE_URL+imagee).apply(requestOptions).into(holder.gambar);
+        } else{
+            Glide.with(Objects.requireNonNull(mCtx)).load("https://malang-paradise.000webhostapp.com/kategori/kategori-" + kategori.getGambar()).apply(requestOptions).into(holder.gambar);
+        }
         holder.nama.setText(kategori.getNama());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemListener.recyclerViewListClicked(v, position);
+            }
+        });
     }
 
     @Override
