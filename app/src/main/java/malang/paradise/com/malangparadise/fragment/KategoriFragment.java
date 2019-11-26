@@ -64,8 +64,6 @@ public class KategoriFragment extends Fragment {
 
         loadPostingan();
 
-        Toast.makeText(getActivity(), ""+namaIntent, Toast.LENGTH_SHORT).show();
-
         return view;
     }
 
