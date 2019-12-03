@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        app:cardBackgroundColor="#fff"
+        app:cardCornerRadius="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Rate Tempat Ini"
+                android:textColor="#A9000000"
+                android:textSize="17sp"
+                android:textStyle="italic" />
+
+            <android.support.v7.widget.AppCompatRatingBar
+                android:id="@+id/rating"
+                android:layout_marginVertical="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:numStars="5"
+                android:rating="0"
+                android:stepSize="0.5" />
+
+            <Button
+                android:textSize="16sp"
+                android:textColor="#ffffff"
+                android:text="Kirim Ratingmu!!"
+                android:background="#1CCF24"
+                android:layout_marginHorizontal="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
