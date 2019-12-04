@@ -2,6 +2,7 @@ package malang.paradise.com.malangparadise.adapter;
 
 import android.app.Activity;
 import android.app.DownloadManager;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import malang.paradise.com.malangparadise.R;
+import malang.paradise.com.malangparadise.activity.DetailPostingan;
 import malang.paradise.com.malangparadise.json.Postingan;
 
 public class SemuaPostinganAdapter extends RecyclerView.Adapter<SemuaPostinganAdapter.ProductViewHolder>{
@@ -51,6 +53,18 @@ public class SemuaPostinganAdapter extends RecyclerView.Adapter<SemuaPostinganAd
 
         Glide.with(Objects.requireNonNull(mCtx)).load("http://malang-paradise.000webhostapp.com/" + postingan.getGambar()).apply(requestOptions).into(holder.gambar);
         holder.nama.setText(postingan.getNama());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mCtx, DetailPostingan.class);
+                intent.putExtra("nama", postingan.getNama());
+                intent.putExtra("gambar", postingan.getGambar());
+                intent.putExtra("berita", postingan.getBerita());
+                intent.putExtra("rating", postingan.getRating());
+                mCtx.startActivity(intent);
+            }
+        });
 
      }
 
