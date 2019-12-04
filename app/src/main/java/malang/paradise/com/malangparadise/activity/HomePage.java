@@ -8,6 +8,7 @@ import malang.paradise.com.malangparadise.inteface.RecyclerViewListClicked;
 import malang.paradise.com.malangparadise.json.Kategori;
 import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
 import malang.paradise.com.malangparadise.request.RequestHandler;
+import malang.paradise.com.malangparadise.request.Utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -263,6 +264,7 @@ public class HomePage extends AppCompatActivity implements RecyclerViewListClick
 
     @Override
     public void recyclerViewListClicked(View v, int position) {
+//        Toast.makeText(this, ""+kategoriList.get(position).getNama(), Toast.LENGTH_SHORT).show();
         kategoriIntent = kategoriList.get(position).getId_kategori();
 
         if(kategoriList.get(position).getNama().equals("Semua")){

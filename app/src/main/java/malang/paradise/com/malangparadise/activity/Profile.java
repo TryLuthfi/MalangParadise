@@ -4,30 +4,20 @@ package malang.paradise.com.malangparadise.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 import malang.paradise.com.malangparadise.R;
 import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
-import malang.paradise.com.malangparadise.request.RequestHandler;
+import malang.paradise.com.malangparadise.request.Utils;
 
 public class Profile extends AppCompatActivity {
 

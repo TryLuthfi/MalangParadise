@@ -1,4 +1,4 @@
-package malang.paradise.com.malangparadise.activity;
+package malang.paradise.com.malangparadise.request;
 
 import android.app.Activity;
 import android.graphics.Color;

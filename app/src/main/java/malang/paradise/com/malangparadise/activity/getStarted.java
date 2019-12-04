@@ -2,7 +2,7 @@ package malang.paradise.com.malangparadise.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import malang.paradise.com.malangparadise.R;
-import okhttp3.internal.Util;
+import malang.paradise.com.malangparadise.request.Utils;
 
 import android.content.Context;
 import android.content.Intent;

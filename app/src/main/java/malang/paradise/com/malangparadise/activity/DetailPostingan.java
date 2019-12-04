@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
@@ -35,10 +34,9 @@ import java.util.Objects;
 
 import malang.paradise.com.malangparadise.R;
 import malang.paradise.com.malangparadise.adapter.DetailPostinganAdapter;
-import malang.paradise.com.malangparadise.adapter.KategoriAdapter;
 import malang.paradise.com.malangparadise.json.Gambar;
-import malang.paradise.com.malangparadise.json.Kategori;
 import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
+import malang.paradise.com.malangparadise.request.Utils;
 
 public class DetailPostingan extends AppCompatActivity {
     private String mPostKeyNama = null, mPostKeyGambar = null, mPostKeyBerita = null,

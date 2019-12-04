@@ -69,7 +69,7 @@
                         android:layout_height="wrap_content"
                         android:numStars="5"
                         android:rating="0"
-                        android:stepSize="0.5" />
+                        android:stepSize="0.1" />
 
                     <TextView
                         android:textColor="#FFC107"

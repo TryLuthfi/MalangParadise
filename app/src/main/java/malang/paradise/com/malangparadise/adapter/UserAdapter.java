@@ -29,7 +29,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder>
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView nama, berita;
+        public TextView nama, berita, ratingNumber;
         AppCompatRatingBar rate;
         public ImageView gambar;
 
@@ -39,6 +39,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder>
             berita = view.findViewById(R.id.berita);
             rate = view.findViewById(R.id.rate);
             gambar = view.findViewById(R.id.gambar);
+            ratingNumber = view.findViewById(R.id.ratingNumber);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -79,6 +80,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder>
                     .load("http://malang-paradise.000webhostapp.com/" + contact.getGambar())
                     .into(holder.gambar);
         }
+
+        holder.rate.setRating(Float.parseFloat(""+contact.getRating()));
+        holder.ratingNumber.setText(contact.getRating());
     }
 
     @Override

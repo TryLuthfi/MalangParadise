@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -20,6 +19,7 @@ import butterknife.OnClick;
 import malang.paradise.com.malangparadise.R;
 import malang.paradise.com.malangparadise.inteface.RegisterApi;
 import malang.paradise.com.malangparadise.json.Value;
+import malang.paradise.com.malangparadise.request.Utils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

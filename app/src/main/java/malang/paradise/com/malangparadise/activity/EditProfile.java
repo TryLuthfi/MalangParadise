@@ -3,7 +3,6 @@ package malang.paradise.com.malangparadise.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -11,6 +10,7 @@ import com.bumptech.glide.request.RequestOptions;
 import de.hdodenhof.circleimageview.CircleImageView;
 import malang.paradise.com.malangparadise.R;
 import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
+import malang.paradise.com.malangparadise.request.Utils;
 
 public class EditProfile extends AppCompatActivity {
 

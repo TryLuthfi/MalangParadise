@@ -2,10 +2,12 @@ package malang.paradise.com.malangparadise.adapter;
 
 import android.app.Activity;
 import android.app.DownloadManager;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,7 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.Produc
     public Activity mContext;
     String id_content;
     DownloadManager downloadManager;
+    int row_index = -1;
 
     public KategoriAdapter(Activity mCtx, List<Kategori> kategoriList, RecyclerViewListClicked itemListener) {
         this.mCtx = mCtx;
@@ -52,7 +55,7 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.Produc
     @Override
     public void onBindViewHolder(final ProductViewHolder holder, final int position) {
         final Kategori kategori = kategoriList.get(position);
-        RequestOptions requestOptions = new RequestOptions()
+        final RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background);
 
         if(kategori.getNama().equals("Semua")){
@@ -62,12 +65,26 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.Produc
         }
         holder.nama.setText(kategori.getNama());
 
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 itemListener.recyclerViewListClicked(v, position);
+                row_index=position;
+                notifyDataSetChanged();
+//                Glide.with(Objects.requireNonNull(mCtx)).load("https://htmlcolors.com/color-image/2196f3.png").apply(requestOptions).into(holder.gambarLuar);
             }
         });
+
+        if(row_index==position){
+//            holder.gambarLuar.setBackgroundColor(Color.parseColor("#2196f3"));
+            Glide.with(Objects.requireNonNull(mCtx)).load("https://htmlcolors.com/color-image/2196f3.png").apply(requestOptions).into(holder.gambarLuar);
+        }
+        else
+        {
+//            holder.gambarLuar.setBackgroundColor(Color.parseColor("#ffffff"));
+            Glide.with(Objects.requireNonNull(mCtx)).load("https://htmlcolors.com/color-image/ffffff.png").apply(requestOptions).into(holder.gambarLuar);
+        }
     }
 
     @Override
@@ -76,9 +93,10 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.Produc
     }
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
-        CircleImageView gambar;
+        CircleImageView gambar, gambarLuar;
         TextView nama;
         View view;
+        LinearLayout kategori;
 
 
         public ProductViewHolder(View itemView) {
@@ -86,7 +104,9 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.Produc
             view = itemView;
 
             gambar = itemView.findViewById(R.id.gambar);
+            gambarLuar = itemView.findViewById(R.id.gambarLuar);
             nama = itemView.findViewById(R.id.nama);
+            kategori = itemView.findViewById(R.id.kategori);
         }
     }
 
