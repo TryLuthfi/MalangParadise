@@ -81,7 +81,6 @@ public class Profile extends AppCompatActivity {
                 intent.putExtra("passwordI",mPostKeyPassword);
                 intent.putExtra("imageI",mPostKeyImage);
                 startActivity(intent);
-                finish();
             }
         });
 

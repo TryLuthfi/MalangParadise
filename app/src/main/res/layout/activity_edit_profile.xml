@@ -22,11 +22,13 @@
             android:gravity="center">
 
             <ImageView
+                android:id="@+id/back"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:background="@drawable/back"/>
 
             <ImageView
+                android:id="@+id/cancel"
                 android:visibility="invisible"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
@@ -188,6 +190,8 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/buttonoption"
+        android:visibility="invisible"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -195,6 +199,7 @@
         android:layout_marginHorizontal="16dp">
 
         <LinearLayout
+            android:id="@+id/cancel_button"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -212,6 +217,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/save_data"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
