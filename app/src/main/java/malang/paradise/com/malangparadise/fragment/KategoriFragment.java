@@ -90,13 +90,13 @@ public class KategoriFragment extends Fragment {
                                             product.getString("id_postingan"),
                                             product.getString("id_user"),
                                             product.getString("id_kategori"),
-                                            product.getString("rating"),
                                             product.getString("id_gambar"),
                                             product.getString("gambar"),
                                             product.getString("nama"),
                                             product.getString("berita"),
                                             product.getString("lokasi"),
-                                            product.getString("tanggal_upload")
+                                            product.getString("tanggal_upload"),
+                                            product.getString("nilai_rating")
                                     ));
                                 }
                             }

@@ -11,7 +11,9 @@ public class konfigurasi {
     public static final String URL_GET_DATAUSER = "http://malang-paradise.000webhostapp.com/datauser.php";
     public static final String URL_PRODUCTS_KATEGORI = "https://malang-paradise.000webhostapp.com/kategori.php";
     public static final String URL_PRODUCTS_POSTINGAN = "https://malang-paradise.000webhostapp.com/postingan.php";
+    public static final String URL_PRODUCTS_GAMBAR = "https://malang-paradise.000webhostapp.com/gambar.php";
     public static final String URL_EDIT_PROFILE = "https://malang-paradise.000webhostapp.com/editprofile.php";
+    public static final String URL_POST_RATING = "https://malang-paradise.000webhostapp.com/insertRating.php";
 
     public static final String TAG_JSON_ARRAY = "datauser";
 }

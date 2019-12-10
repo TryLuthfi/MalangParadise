@@ -58,10 +58,11 @@ public class SemuaPostinganAdapter extends RecyclerView.Adapter<SemuaPostinganAd
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mCtx, DetailPostingan.class);
+                intent.putExtra("id_postingan", postingan.getId_postingan());
                 intent.putExtra("nama", postingan.getNama());
                 intent.putExtra("gambar", postingan.getGambar());
                 intent.putExtra("berita", postingan.getBerita());
-                intent.putExtra("rating", postingan.getRating());
+                intent.putExtra("rating", postingan.getNilai_rating());
                 intent.putExtra("lokasi", postingan.getLokasi());
                 mCtx.startActivity(intent);
             }

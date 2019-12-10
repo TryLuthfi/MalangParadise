@@ -4,25 +4,25 @@ public class Postingan {
     private String id_postingan;
     private String id_user;
     private String id_kategori;
-    private String rating;
     private String id_gambar;
     private String gambar;
     private String nama;
     private String berita;
     private String lokasi;
     private String tanggal_upload;
+    private String nilai_rating;
 
-    public Postingan(String id_postingan, String id_user, String id_kategori, String rating, String id_gambar, String gambar,String nama, String berita, String lokasi, String tanggal_upload) {
+    public Postingan(String id_postingan, String id_user, String id_kategori, String id_gambar, String gambar,String nama, String berita, String lokasi, String tanggal_upload, String nilai_rating) {
         this.id_postingan = id_postingan;
         this.id_user = id_user;
         this.id_kategori = id_kategori;
-        this.rating = rating;
         this.id_gambar = id_gambar;
         this.gambar = gambar;
         this.nama = nama;
         this.berita = berita;
         this.lokasi = lokasi;
         this.tanggal_upload = tanggal_upload;
+        this.nilai_rating = nilai_rating;
     }
 
     public String getId_postingan() {
@@ -35,10 +35,6 @@ public class Postingan {
 
     public String getId_kategori() {
         return id_kategori;
-    }
-
-    public String getRating() {
-        return rating;
     }
 
     public String getId_gambar() {
@@ -64,4 +60,6 @@ public class Postingan {
     public String getTanggal_upload() {
         return tanggal_upload;
     }
+
+    public String getNilai_rating() { return nilai_rating;}
 }

@@ -72,9 +72,9 @@
                 android:orientation="horizontal" >
 
                 <ImageView
+                    android:id="@+id/bintangIcon"
                     android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/stars" />
+                    android:layout_height="30dp" />
 
                 <TextView
                     android:id="@+id/rating"

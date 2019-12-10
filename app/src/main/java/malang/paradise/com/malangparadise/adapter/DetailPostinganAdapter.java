@@ -1,12 +1,14 @@
 package malang.paradise.com.malangparadise.adapter;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.DownloadManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ import malang.paradise.com.malangparadise.inteface.RecyclerViewListClicked;
 import malang.paradise.com.malangparadise.json.Gambar;
 import malang.paradise.com.malangparadise.json.Kategori;
 import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 import static malang.paradise.com.malangparadise.activity.HomePage.imagee;
 
@@ -57,10 +60,22 @@ public class DetailPostinganAdapter extends RecyclerView.Adapter<DetailPostingan
                 .placeholder(R.drawable.ic_launcher_background);
 
         Glide.with(Objects.requireNonNull(mCtx)).load("https://malang-paradise.000webhostapp.com/" + gambar.getGambar()).apply(requestOptions).into(holder.gambar);
+
         holder.gambar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mCtx, "https://malang-paradise.000webhostapp.com/" + gambar.getGambar(), Toast.LENGTH_SHORT).show();
+                final Dialog dialog = new Dialog(mCtx);
+                dialog.setCancelable(true);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setCanceledOnTouchOutside(true);
+                dialog.setContentView(R.layout.custom_dialog);
+                ImageView gambarDialog = dialog.findViewById(R.id.gambar);
+                Glide.with((mCtx)).load("https://malang-paradise.000webhostapp.com/" + gambar.getGambar()).into(gambarDialog);
+                PhotoViewAttacher photoViewAttacher = new PhotoViewAttacher(gambarDialog);
+                photoViewAttacher.update();
+                dialog.show();
+                Window window = dialog.getWindow();
+                window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         });
     }

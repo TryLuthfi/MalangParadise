@@ -23,6 +23,7 @@ import malang.paradise.com.malangparadise.R;
 import malang.paradise.com.malangparadise.inteface.UpdateProfileApi;
 import malang.paradise.com.malangparadise.json.Value;
 import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
+import malang.paradise.com.malangparadise.request.Utils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -217,7 +218,7 @@ public class EditProfile extends AppCompatActivity {
                     Toast.makeText(EditProfile.this, "Gagal", Toast.LENGTH_SHORT).show();
                 }
                 startActivity(new Intent(EditProfile.this,HomePage.class)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 finish();
             }
 
