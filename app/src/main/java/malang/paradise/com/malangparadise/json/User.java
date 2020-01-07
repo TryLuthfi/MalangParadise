@@ -5,13 +5,13 @@ public class User {
      String id_postingan;
      String id_user;
      String id_kategori;
-     String rating;
      String id_gambar;
      String gambar;
      String nama;
      String berita;
      String lokasi;
      String tanggal_upload;
+     float nilai_rating;
 
     public User(){
 
@@ -29,9 +29,6 @@ public class User {
         return id_kategori;
     }
 
-    public String getRating() {
-        return rating;
-    }
 
     public String getId_gambar() {
         return id_gambar;
@@ -56,4 +53,6 @@ public class User {
     public String getTanggal_upload() {
         return tanggal_upload;
     }
+
+    public float getNilai_rating() {return nilai_rating;}
 }

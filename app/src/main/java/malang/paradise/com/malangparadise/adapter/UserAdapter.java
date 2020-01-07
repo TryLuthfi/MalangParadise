@@ -1,5 +1,6 @@
 package malang.paradise.com.malangparadise.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.RecyclerView;
@@ -67,6 +68,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder>
         return new MyViewHolder(itemView);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final User contact = contactListFiltered.get(position);
@@ -80,9 +82,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder>
                     .load("http://malang-paradise.000webhostapp.com/" + contact.getGambar())
                     .into(holder.gambar);
         }
-
-        holder.rate.setRating(Float.parseFloat(""+contact.getRating()));
-        holder.ratingNumber.setText(contact.getRating());
+        holder.rate.setRating(contact.getNilai_rating());
+        holder.ratingNumber.setText(Float.toString(contact.getNilai_rating()));
     }
 
     @Override

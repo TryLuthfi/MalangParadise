@@ -56,7 +56,7 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.Produc
     public void onBindViewHolder(final ProductViewHolder holder, final int position) {
         final Kategori kategori = kategoriList.get(position);
         final RequestOptions requestOptions = new RequestOptions()
-                .placeholder(R.drawable.ic_launcher_background);
+                .placeholder(R.color.colorBlack);
 
         if(kategori.getNama().equals("Semua")){
             Glide.with(Objects.requireNonNull(mCtx)).load(konfigurasi.PROFILE_IMAGE_URL+imagee).apply(requestOptions).into(holder.gambar);
@@ -72,17 +72,14 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.Produc
                 itemListener.recyclerViewListClicked(v, position);
                 row_index=position;
                 notifyDataSetChanged();
-//                Glide.with(Objects.requireNonNull(mCtx)).load("https://htmlcolors.com/color-image/2196f3.png").apply(requestOptions).into(holder.gambarLuar);
             }
         });
 
         if(row_index==position){
-//            holder.gambarLuar.setBackgroundColor(Color.parseColor("#2196f3"));
             Glide.with(Objects.requireNonNull(mCtx)).load("https://htmlcolors.com/color-image/2196f3.png").apply(requestOptions).into(holder.gambarLuar);
         }
         else
         {
-//            holder.gambarLuar.setBackgroundColor(Color.parseColor("#ffffff"));
             Glide.with(Objects.requireNonNull(mCtx)).load("https://htmlcolors.com/color-image/ffffff.png").apply(requestOptions).into(holder.gambarLuar);
         }
     }

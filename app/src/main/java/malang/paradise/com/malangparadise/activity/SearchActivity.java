@@ -183,12 +183,14 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Con
     @Override
     public void onContactSelected(User contact) {
         Intent intent = new Intent(SearchActivity.this, DetailPostingan.class);
+        intent.putExtra("id_postingan", contact.getId_postingan());
         intent.putExtra("nama", contact.getNama());
         intent.putExtra("gambar", contact.getGambar());
         intent.putExtra("berita", contact.getBerita());
-        intent.putExtra("rating", contact.getRating());
+        intent.putExtra("rating", contact.getNilai_rating());
         intent.putExtra("lokasi", contact.getLokasi());
         startActivity(intent);
+//        Toast.makeText(this, ""+contact.getId_postingan()+contact.getNama(), Toast.LENGTH_SHORT).show();
     }
 
 

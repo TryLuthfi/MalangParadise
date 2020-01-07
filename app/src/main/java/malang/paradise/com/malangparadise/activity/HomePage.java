@@ -264,7 +264,6 @@ public class HomePage extends AppCompatActivity implements RecyclerViewListClick
 
     @Override
     public void recyclerViewListClicked(View v, int position) {
-//        Toast.makeText(this, ""+kategoriList.get(position).getNama(), Toast.LENGTH_SHORT).show();
         kategoriIntent = kategoriList.get(position).getId_kategori();
 
         if(kategoriList.get(position).getNama().equals("Semua")){

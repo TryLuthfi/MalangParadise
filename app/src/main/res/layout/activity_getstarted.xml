@@ -6,26 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".activity.getStarted">
 
-<!--    <ImageView-->
-<!--        android:layout_marginLeft="-200dp"-->
-<!--        android:layout_marginRight="-50dp"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:background="@drawable/background" />-->
+    <ImageView
+        android:layout_marginLeft="-200dp"
+        android:layout_marginRight="-50dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/getstarted" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="#54FF5722"
         android:layout_height="match_parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="100dp"
         android:gravity="center"
         android:orientation="vertical"
         android:layout_height="wrap_content" >
 
+        <ImageView
+            android:layout_width="120dp"
+            android:background="@drawable/logomp2"
+            android:layout_height="90dp" />
+
         <LinearLayout
+            android:layout_marginTop="-10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -49,13 +55,8 @@
 
         </LinearLayout>
 
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:background="@drawable/logomalangparadise"-->
-<!--            android:layout_height="wrap_content" />-->
 
         <TextView
-            android:layout_marginTop="10dp"
             android:textStyle="bold"
             android:textSize="20sp"
             android:layout_width="wrap_content"

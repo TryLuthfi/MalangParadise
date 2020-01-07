@@ -49,7 +49,7 @@ public class SemuaPostinganAdapter extends RecyclerView.Adapter<SemuaPostinganAd
     public void onBindViewHolder(final ProductViewHolder holder, int position) {
         final Postingan postingan = postinganList.get(position);
         RequestOptions requestOptions = new RequestOptions()
-                .placeholder(R.drawable.ic_launcher_background);
+                .placeholder(R.color.colorPrimary);
 
         Glide.with(Objects.requireNonNull(mCtx)).load("http://malang-paradise.000webhostapp.com/" + postingan.getGambar()).apply(requestOptions).into(holder.gambar);
         holder.nama.setText(postingan.getNama());

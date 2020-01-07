@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "34228610802",
+    "firebase_url": "https://malangparadise-b55ae.firebaseio.com",
+    "project_id": "malangparadise-b55ae",
+    "storage_bucket": "malangparadise-b55ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34228610802:android:8064fe26f8b98277fc526b",
+        "android_client_info": {
+          "package_name": "malang.paradise.com.malangparadise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "34228610802-7bcmlc8rp8pbuenab0ph086lu87mk2qv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "malang.paradise.com.malangparadise",
+            "certificate_hash": "b13f3737ce70650939119a8e30dbd52abe4f3f02"
+          }
+        },
+        {
+          "client_id": "34228610802-o8t46s95mgoi2irqv6c8ct5iajassv61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2O_QNPzvnx_wFZoP5tlYuJ9yum8eTTM8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "34228610802-o8t46s95mgoi2irqv6c8ct5iajassv61.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

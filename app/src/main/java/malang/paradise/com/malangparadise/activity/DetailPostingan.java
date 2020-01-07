@@ -49,15 +49,18 @@ import malang.paradise.com.malangparadise.request.RequestHandler;
 import malang.paradise.com.malangparadise.request.Utils;
 
 public class DetailPostingan extends AppCompatActivity {
-    private String mPostKeyNama = null, mPostKeyGambar = null, mPostKeyBerita = null,
-    mPostKeyRating = null, mPostKeyLokasi = null, mPostKeyIdPostingan = null;
+    private String mPostKeyNama = null, mPostKeyGambar = null, mPostKeyBerita = null
+            , mPostKeyLokasi = null, mPostKeyIdPostingan = null;
+    private float mPostKeyRating;
     private CollapsingToolbarLayout collapsingToolbar;
     private ImageView iv_header;
     private ImageView bintangIcon;
     private TextView berita;
     private TextView rating;
     private TextView lokasi;
+    Dialog dialog;
 
+    String JSON_STRING;
     String id_user;
 
     private static final String TAG = "DetailPostingan";
@@ -66,6 +69,9 @@ public class DetailPostingan extends AppCompatActivity {
     RecyclerView recyclerViewGambar;
 
     private AppCompatRatingBar rate;
+
+    String id_rating, id_postingan, id_userr;
+    String nilai_rating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,26 +88,28 @@ public class DetailPostingan extends AppCompatActivity {
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         rate = findViewById(R.id.rate);
 
+        getJSON();
         id_user = getIdUser();
 
         mPostKeyIdPostingan = getIntent().getExtras().getString("id_postingan");
         mPostKeyNama = getIntent().getExtras().getString("nama");
         mPostKeyGambar = getIntent().getExtras().getString("gambar");
         mPostKeyBerita = getIntent().getExtras().getString("berita");
-        mPostKeyRating = getIntent().getExtras().getString("rating");
+        mPostKeyRating = getIntent().getExtras().getFloat("rating");
         mPostKeyLokasi = getIntent().getExtras().getString("lokasi");
 
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background);
 
-        berita.setText(mPostKeyBerita);
+        berita.setText("    "+mPostKeyBerita);
         lokasi.setText(mPostKeyLokasi);
-        if(mPostKeyRating.equals("null")){
+
+        if(Float.toString(mPostKeyRating).equals("null")){
             rating.setText("0.0");
             bintangIcon.setImageDrawable(ContextCompat.getDrawable(DetailPostingan.this, R.drawable.starnull));
         }else {
             bintangIcon.setImageDrawable(ContextCompat.getDrawable(DetailPostingan.this, R.drawable.stars));
-            rating.setText(mPostKeyRating);
+            rating.setText(Float.toString(mPostKeyRating));
         }
         collapsingToolbar.setTitle(mPostKeyNama);
         collapsingToolbar.setCollapsedTitleTextColor(getResources().getColor(R.color.colorBlack));
@@ -122,13 +130,13 @@ public class DetailPostingan extends AppCompatActivity {
         rate.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, final float rating, boolean fromUser) {
-                final Dialog dialog = new Dialog(DetailPostingan.this);
+                dialog = new Dialog(DetailPostingan.this);
                 dialog.setCancelable(true);
                 dialog.setCanceledOnTouchOutside(true);
                 dialog.setContentView(R.layout.rate);
-                AppCompatRatingBar rate = dialog.findViewById(R.id.rating);
+                AppCompatRatingBar rrt = dialog.findViewById(R.id.rating);
                 Button kirim = dialog.findViewById(R.id.kirim);
-                rate.setRating(Float.parseFloat(""+rating));
+                rrt.setRating(Float.parseFloat(""+rating));
                 kirim.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -226,6 +234,67 @@ public class DetailPostingan extends AppCompatActivity {
         //adding our stringrequest to queue
         Volley.newRequestQueue(Objects.requireNonNull(getApplicationContext())).add(stringRequest);
     }
+
+    private void getJSON() {
+
+        class getJSON extends AsyncTask<Void,Void,String> {
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                JSON_STRING = s;
+                showData();
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                RequestHandler rh = new RequestHandler();
+                String s = rh.sendGetRequest(konfigurasi.URL_GET_DATARATING);
+                return s;
+            }
+        }
+        getJSON gj = new getJSON();
+        gj.execute();
+    }
+
+    private void showData() {
+        JSONObject jsonObject = null;
+        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
+        try {
+            jsonObject = new JSONObject(JSON_STRING);
+            JSONArray result = jsonObject.getJSONArray(konfigurasi.TAG_JSON_ARRAY);
+
+            for (int i = 0 ; i < result.length(); i++){
+                JSONObject jo = result.getJSONObject(i);
+                id_rating = jo.getString("id_rating");
+                id_postingan = jo.getString("id_postingan");
+                id_userr = jo.getString("id_user");
+                nilai_rating = jo.getString("nilai_rating");
+
+                HashMap<String,String> data = new HashMap<>();
+
+                data.put("id_user",id_userr);
+
+                if(id_userr.equals(id_user) && id_postingan.equals(mPostKeyIdPostingan)){
+                    rate.setRating(Float.parseFloat(""+nilai_rating));
+                    Toast.makeText(this, ""+nilai_rating, Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+
+                list.add(data);
+
+
+            }
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     private String getIdUser(){
         SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
         String id_user = preferences.getString("id_user", "null");

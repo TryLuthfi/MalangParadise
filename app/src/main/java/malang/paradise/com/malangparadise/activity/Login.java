@@ -3,6 +3,7 @@ package malang.paradise.com.malangparadise.activity;
 import malang.paradise.com.malangparadise.R;
 import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
 import malang.paradise.com.malangparadise.request.Utils;
+import malang.paradise.com.malangparadise.request.encryptMd5;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -24,15 +25,19 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Login extends AppCompatActivity {
     private LinearLayout login;
+    private LinearLayout facebookAuth;
+    private LinearLayout googleAuth;
     private TextView register;
     private EditText usernameE;
     private EditText passwordE;
     private ProgressDialog progressDialog;
+    private String hasilmd5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,8 @@ public class Login extends AppCompatActivity {
             gotoCourseActivity();
         }
 
+        facebookAuth = findViewById(R.id.facebookAuth);
+        googleAuth = findViewById(R.id.googleAuth);
         progressDialog = new ProgressDialog(Login.this);
         usernameE = findViewById(R.id.username);
         passwordE = findViewById(R.id.password);
@@ -55,7 +62,7 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                btnMD5();
             }
         });
 
@@ -66,9 +73,24 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        facebookAuth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(Login.this, "Not yet", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        googleAuth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(Login.this, "Not Yet", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void login() {
+//        Toast.makeText(this, hasilmd5, Toast.LENGTH_SHORT).show();
         final String username = usernameE.getText().toString().trim();
         final String password = passwordE.getText().toString().trim();
 
@@ -80,7 +102,6 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-//                        Log.e("idpelangan",response.toString());
                         if (response.contains(konfigurasi.LOGIN_SUCCESS)) {
                             hideDialog();
                             String id_user = response.toString().split(";")[1];
@@ -90,7 +111,6 @@ public class Login extends AppCompatActivity {
 
                         } else {
                             hideDialog();
-                            //Displaying an error message on toast
                             Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -98,7 +118,6 @@ public class Login extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //You can handle error here if you want
                         hideDialog();
                         Toast.makeText(getApplicationContext(), "The server unreachable", Toast.LENGTH_LONG).show();
 
@@ -108,7 +127,7 @@ public class Login extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put(konfigurasi.KEY_USERNAME, username);
-                params.put(konfigurasi.KEY_PASSWORD, password);
+                params.put(konfigurasi.KEY_PASSWORD, hasilmd5);
 
                 return params;
             }
@@ -144,5 +163,25 @@ public class Login extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
         String id_user = preferences.getString("id_user", "null");
         return id_user;
+    }
+
+    public void btnMD5(){
+        byte[] md5input = passwordE.getText().toString().getBytes();
+        BigInteger md5Data = null;
+
+        try{
+            md5Data =new BigInteger(1, encryptMd5.encryptMD5(md5input));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        String md5Str = md5Data.toString(16);
+        if(md5Str.length() < 32){
+            md5Str = 0 + md5Str;
+        }
+
+        hasilmd5 = md5Str;
+        login();
+
     }
 }
