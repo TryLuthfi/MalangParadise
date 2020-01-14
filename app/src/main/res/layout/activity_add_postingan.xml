@@ -115,31 +115,28 @@
                     android:text="Gambar"
                     android:textSize="20dp"/>
 
+                <ImageView
+                    android:id="@+id/view_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:maxHeight="200dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginHorizontal="5dp"
-                    android:layout_marginVertical="10dp">
+                    android:layout_marginVertical="10dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/form">
 
-                    <ImageView
-                        android:id="@+id/view_image"
+                    <Button
+                        android:id="@+id/choose_image"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:background="@drawable/form">
-
-                        <Button
-                            android:id="@+id/choose_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@null"
-                            android:text="Pilih Gambar"/>
-
-                    </LinearLayout>
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:text="Pilih Gambar"/>
 
                 </LinearLayout>
 
