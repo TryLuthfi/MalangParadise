@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -53,7 +53,8 @@ public class Profile extends AppCompatActivity {
         loading = findViewById(R.id.loading);
         edit_profile = findViewById(R.id.edit_profile);
 
-        RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.ic_launcher_background);
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.color.colorBlack);
 
         username.setText(mPostkeyUsername);
         name.setText(mPostKeyNama);

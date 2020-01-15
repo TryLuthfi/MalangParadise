@@ -3,15 +3,13 @@ package malang.paradise.com.malangparadise.adapter;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DownloadManager;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -19,15 +17,9 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.List;
 import java.util.Objects;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import malang.paradise.com.malangparadise.R;
-import malang.paradise.com.malangparadise.inteface.RecyclerViewListClicked;
 import malang.paradise.com.malangparadise.json.Gambar;
-import malang.paradise.com.malangparadise.json.Kategori;
-import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
 import uk.co.senab.photoview.PhotoViewAttacher;
-
-import static malang.paradise.com.malangparadise.activity.HomePage.imagee;
 
 public class DetailPostinganAdapter extends RecyclerView.Adapter<DetailPostinganAdapter.ProductViewHolder>{
 

@@ -1,18 +1,31 @@
 package malang.paradise.com.malangparadise.activity;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatRatingBar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import malang.paradise.com.malangparadise.R;
+import malang.paradise.com.malangparadise.adapter.DetailPostinganAdapter;
+import malang.paradise.com.malangparadise.json.Gambar;
+import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
+import malang.paradise.com.malangparadise.request.RequestHandler;
+import malang.paradise.com.malangparadise.request.Utils;
+
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.os.AsyncTask;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Build;
 import android.os.Bundle;
-import androidx.appcompat.widget.AppCompatRatingBar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +43,21 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,14 +68,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-import malang.paradise.com.malangparadise.R;
-import malang.paradise.com.malangparadise.adapter.DetailPostinganAdapter;
-import malang.paradise.com.malangparadise.json.Gambar;
-import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
-import malang.paradise.com.malangparadise.request.RequestHandler;
-import malang.paradise.com.malangparadise.request.Utils;
+public class Coba extends FragmentActivity  implements OnMapReadyCallback,
+        GoogleApiClient.ConnectionCallbacks, GoogleMap.OnMarkerClickListener,
+        GoogleApiClient.OnConnectionFailedListener,
+        LocationListener {
 
-public class DetailPostingan extends AppCompatActivity {
+    private GoogleMap mMap;
     private String mPostKeyNama = null, mPostKeyGambar = null, mPostKeyBerita = null
             , mPostKeyLokasi = null, mPostKeyIdPostingan = null;
     private float mPostKeyRating;
@@ -58,6 +84,12 @@ public class DetailPostingan extends AppCompatActivity {
     private TextView berita;
     private TextView rating;
     private TextView lokasi;
+
+    private static final int PERMISSION_REQUEST_CODE = 7001;
+    private static final int PLAY_SERVICE_REQUEST = 7002;
+
+    private LocationRequest mLocationRequest;
+    private GoogleApiClient mGoogleApiClient;
     Dialog dialog;
 
     String JSON_STRING;
@@ -68,6 +100,10 @@ public class DetailPostingan extends AppCompatActivity {
     List<Gambar> gambarList;
     RecyclerView recyclerViewGambar;
 
+    private static final int UPDATE_INTERVAL = 5000;//5 detik
+    private static final int FASTEST_INTERVAL = 3000;//3detik
+    private static final int DISPLACEMENT = 10;
+
     private AppCompatRatingBar rate;
 
     String id_rating, id_postingan, id_userr;
@@ -76,7 +112,10 @@ public class DetailPostingan extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_postingan);
+        setContentView(R.layout.activity_coba);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         Utils.darkenStatusBar(this,R.color.colorPrimary);
 
@@ -90,6 +129,8 @@ public class DetailPostingan extends AppCompatActivity {
 
         getJSON();
         id_user = getIdUser();
+
+        setUpLocation();
 
         mPostKeyIdPostingan = getIntent().getExtras().getString("id_postingan");
         mPostKeyNama = getIntent().getExtras().getString("nama");
@@ -107,9 +148,9 @@ public class DetailPostingan extends AppCompatActivity {
 
         if(mPostKeyRating2.equals("null")){
             rating.setText("0.0");
-            bintangIcon.setImageDrawable(ContextCompat.getDrawable(DetailPostingan.this, R.drawable.starnull));
+            bintangIcon.setImageDrawable(ContextCompat.getDrawable(Coba.this, R.drawable.starnull));
         }else {
-            bintangIcon.setImageDrawable(ContextCompat.getDrawable(DetailPostingan.this, R.drawable.stars));
+            bintangIcon.setImageDrawable(ContextCompat.getDrawable(Coba.this, R.drawable.stars));
             rating.setText(mPostKeyRating2);
         }
         collapsingToolbar.setTitle(mPostKeyNama);
@@ -122,7 +163,7 @@ public class DetailPostingan extends AppCompatActivity {
 
         recyclerViewGambar = findViewById(R.id.gambarRecyclerView);
         recyclerViewGambar.setHasFixedSize(true);
-        recyclerViewGambar.setLayoutManager(new LinearLayoutManager(DetailPostingan.this));
+        recyclerViewGambar.setLayoutManager(new LinearLayoutManager(Coba.this));
         recyclerViewGambar.setLayoutManager(layoutManager);
 
         gambarList = new ArrayList<>();
@@ -132,7 +173,7 @@ public class DetailPostingan extends AppCompatActivity {
         rate.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, final float rating, boolean fromUser) {
-                dialog = new Dialog(DetailPostingan.this);
+                dialog = new Dialog(Coba.this);
                 dialog.setCancelable(true);
                 dialog.setCanceledOnTouchOutside(true);
                 dialog.setContentView(R.layout.rate);
@@ -180,8 +221,89 @@ public class DetailPostingan extends AppCompatActivity {
 
             }
         });
+    }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
 
+        googleMap.setOnMarkerClickListener(this);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                buildGoogleApiClient();
+                mMap.setMyLocationEnabled(true);
+            }
+        } else {
+            buildGoogleApiClient();
+            mMap.setMyLocationEnabled(true);
+        }
+
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mMap.getUiSettings().setCompassEnabled(true);
+        mMap.getUiSettings().setRotateGesturesEnabled(true);
+        mMap.getUiSettings().setCompassEnabled(true);
+        mMap.getUiSettings().setTiltGesturesEnabled(true);
+
+        LatLng sydney = new LatLng(-7.9789705, 112.6315727);
+        mMap.addMarker(new MarkerOptions().position(sydney).title(""+mPostKeyNama));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(10).build();
+        cameraPosition = new CameraPosition.Builder()
+                .target(sydney)
+                .zoom(16)
+                .tilt(15)
+                .build();
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+    }
+
+    private void setUpLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+            }, PERMISSION_REQUEST_CODE);
+        } else {
+            if (checkPlayServices()) {
+                buildGoogleApiClient();
+                createLocationRequest();
+//                displayLocation();
+            }
+        }
+    }
+
+    private boolean checkPlayServices() {
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode))
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this, PLAY_SERVICE_REQUEST).show();
+            else {
+                Toast.makeText(this, "This device is not supported", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+            return false;
+        }
+        return true;
+    }
+
+    private void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setSmallestDisplacement(DISPLACEMENT);
+    }
+
+    private void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
     }
 
     private void loadGambar() {
@@ -210,7 +332,7 @@ public class DetailPostingan extends AppCompatActivity {
                                 ));
                             }
 
-                            DetailPostinganAdapter adapter = new DetailPostinganAdapter(DetailPostingan.this, gambarList);
+                            DetailPostinganAdapter adapter = new DetailPostinganAdapter(Coba.this, gambarList);
 
                             if (adapter != null){
                                 recyclerViewGambar.setAdapter(adapter);
@@ -303,4 +425,28 @@ public class DetailPostingan extends AppCompatActivity {
         return id_user;
     }
 
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
+    }
 }

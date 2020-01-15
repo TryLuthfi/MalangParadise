@@ -4,11 +4,10 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -152,7 +151,8 @@ public class EditProfile extends AppCompatActivity {
             }
         });
 
-        RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.ic_launcher_background);
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.color.colorBlack);
         Glide.with(getApplicationContext()).load(konfigurasi.PROFILE_IMAGE_URL+mPostKeyImage).apply(requestOptions).into(imageProfile);
 
         save.setOnClickListener(new View.OnClickListener() {

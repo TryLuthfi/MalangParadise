@@ -6,11 +6,18 @@
     <application
         android:name=".request.MyApplication"
         android:allowBackup="true"
+        android:appComponentFactory="whateverString"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:appComponentFactory">
+
+        <activity
+            android:name=".activity.Coba"
+            android:label="@string/title_activity_coba">
+        </activity>
 
         <activity
             android:name=".activity.SearchActivity"
@@ -30,13 +37,17 @@
         <activity android:name=".activity.HomePage" />
         <activity android:name=".activity.Login" />
         <activity android:name=".activity.Profile" />
-        <activity android:name=".activity.getStarted">
+        <activity android:name=".activity.getStarted" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
     </application>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
