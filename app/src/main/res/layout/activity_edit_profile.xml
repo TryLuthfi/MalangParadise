@@ -172,6 +172,12 @@
 
         </LinearLayout>
 
+        <TextView
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:id="@+id/figuran"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <LinearLayout

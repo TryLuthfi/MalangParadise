@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -36,6 +38,7 @@ public class AllFragment extends Fragment {
     List<Postingan> postinganList;
     RecyclerView recyclerViewPostingan;
     View view;
+    ProgressBar loading;
 
 
     public AllFragment() {
@@ -53,6 +56,8 @@ public class AllFragment extends Fragment {
         recyclerViewPostingan.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         postinganList = new ArrayList<>();
+
+        loading = view.findViewById(R.id.loading);
 
         loadPostingan();
 
@@ -77,24 +82,31 @@ public class AllFragment extends Fragment {
                                 JSONObject product = array.getJSONObject(i);
 
                                 //adding the product to product list
-                                postinganList.add(new Postingan(
-                                        product.getString("id_postingan"),
-                                        product.getString("id_user"),
-                                        product.getString("id_kategori"),
-                                        product.getString("id_gambar"),
-                                        product.getString("gambar"),
-                                        product.getString("nama"),
-                                        product.getString("berita"),
-                                        product.getString("lokasi"),
-                                        product.getString("tanggal_upload"),
-                                        product.getString("nilai_rating")
-                                ));
+                                if(product.getString("status").equals("aktif")) {
+                                    postinganList.add(new Postingan(
+                                            product.getString("id_postingan"),
+                                            product.getString("id_user"),
+                                            product.getString("id_kategori"),
+                                            product.getString("id_gambar"),
+                                            product.getString("gambar"),
+                                            product.getString("nama"),
+                                            product.getString("berita"),
+                                            product.getString("lokasi"),
+                                            product.getString("tanggal_upload"),
+                                            product.getString("lat"),
+                                            product.getString("longg"),
+                                            product.getString("status"),
+                                            product.getString("notife"),
+                                            product.getString("nilai_rating")
+                                    ));
+                                }
                             }
 
                             SemuaPostinganAdapter adapter= new SemuaPostinganAdapter(getActivity(), postinganList);
 
                             if (adapter != null){
                                 recyclerViewPostingan.setAdapter(adapter);
+                                loading.setVisibility(View.INVISIBLE);
 
                             }else {
                                 Toast.makeText(getActivity(), "null", Toast.LENGTH_SHORT).show();

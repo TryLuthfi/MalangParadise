@@ -11,7 +11,9 @@ public class User {
      String berita;
      String lokasi;
      String tanggal_upload;
-     float nilai_rating;
+     String lat;
+     String longg;
+     String nilai_rating;
 
     public User(){
 
@@ -54,5 +56,13 @@ public class User {
         return tanggal_upload;
     }
 
-    public float getNilai_rating() {return nilai_rating;}
+    public String getLat() {
+        return lat;
+    }
+
+    public String getLongg() {
+        return longg;
+    }
+
+    public String getNilai_rating() {return nilai_rating;}
 }

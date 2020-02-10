@@ -63,6 +63,8 @@ public class SemuaPostinganAdapter extends RecyclerView.Adapter<SemuaPostinganAd
                 intent.putExtra("rating", postingan.getNilai_rating());
                 intent.putExtra("rating2", postingan.getNilai_rating());
                 intent.putExtra("lokasi", postingan.getLokasi());
+                intent.putExtra("lat", postingan.getLat());
+                intent.putExtra("longg", postingan.getLongg());
                 mCtx.startActivity(intent);
             }
         });

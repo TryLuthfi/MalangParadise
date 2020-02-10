@@ -50,8 +50,7 @@ import malang.paradise.com.malangparadise.request.Utils;
 public class DetailPostingan extends AppCompatActivity {
     private String mPostKeyNama = null, mPostKeyGambar = null, mPostKeyBerita = null
             , mPostKeyLokasi = null, mPostKeyIdPostingan = null;
-    private float mPostKeyRating;
-    private String mPostKeyRating2;
+    private String mPostKeyRating;
     private CollapsingToolbarLayout collapsingToolbar;
     private ImageView iv_header;
     private ImageView bintangIcon;
@@ -95,8 +94,7 @@ public class DetailPostingan extends AppCompatActivity {
         mPostKeyNama = getIntent().getExtras().getString("nama");
         mPostKeyGambar = getIntent().getExtras().getString("gambar");
         mPostKeyBerita = getIntent().getExtras().getString("berita");
-        mPostKeyRating = getIntent().getExtras().getFloat("rating");
-        mPostKeyRating2 = getIntent().getExtras().getString("rating2");
+        mPostKeyRating = getIntent().getExtras().getString("rating");
         mPostKeyLokasi = getIntent().getExtras().getString("lokasi");
 
         RequestOptions requestOptions = new RequestOptions()
@@ -105,12 +103,12 @@ public class DetailPostingan extends AppCompatActivity {
         berita.setText("    "+mPostKeyBerita);
         lokasi.setText(mPostKeyLokasi);
 
-        if(mPostKeyRating2.equals("null")){
+        if(mPostKeyRating.equals("null")){
             rating.setText("0.0");
             bintangIcon.setImageDrawable(ContextCompat.getDrawable(DetailPostingan.this, R.drawable.starnull));
         }else {
             bintangIcon.setImageDrawable(ContextCompat.getDrawable(DetailPostingan.this, R.drawable.stars));
-            rating.setText(mPostKeyRating2);
+            rating.setText(mPostKeyRating);
         }
         collapsingToolbar.setTitle(mPostKeyNama);
         collapsingToolbar.setCollapsedTitleTextColor(getResources().getColor(R.color.colorBlack));

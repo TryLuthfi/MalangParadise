@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -32,6 +33,7 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import malang.paradise.com.malangparadise.R;
 import malang.paradise.com.malangparadise.adapter.UserAdapter;
 import malang.paradise.com.malangparadise.json.User;
@@ -45,6 +47,9 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Con
     private List<User> contactList;
     private UserAdapter mAdapter;
     private SearchView searchView;
+    private ProgressBar loading;
+
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -52,6 +57,7 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Con
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        loading = findViewById(R.id.loading);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -60,6 +66,15 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Con
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
 
         whiteNotificationBar(recyclerView);
+
+        swipeRefreshLayout = findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                fetchContacts();
+            }
+        });
 
         recyclerView = findViewById(R.id.recycler_view);
         contactList = new ArrayList<>();
@@ -84,7 +99,7 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Con
      * fetches json by making http calls
      */
     private void fetchContacts() {
-        JsonArrayRequest request = new JsonArrayRequest(konfigurasi.URL_PRODUCTS_POSTINGAN,
+        JsonArrayRequest request = new JsonArrayRequest(konfigurasi.URL_PRODUCTS_POSTINGANSEARCH,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -98,13 +113,15 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Con
 
                         contactList.clear();
                         contactList.addAll(items);
+                        loading.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                        swipeRefreshLayout.setRefreshing(false);
 
                         mAdapter.notifyDataSetChanged();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                // error in getting json
                 Log.e(TAG, "salah: " + error.getMessage());
                 Toast.makeText(getApplicationContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -182,15 +199,17 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Con
 
     @Override
     public void onContactSelected(User contact) {
-        Intent intent = new Intent(SearchActivity.this, DetailPostingan.class);
+        Intent intent = new Intent(SearchActivity.this, Coba.class);
         intent.putExtra("id_postingan", contact.getId_postingan());
         intent.putExtra("nama", contact.getNama());
         intent.putExtra("gambar", contact.getGambar());
         intent.putExtra("berita", contact.getBerita());
         intent.putExtra("rating", contact.getNilai_rating());
+        intent.putExtra("rating2", contact.getNilai_rating());
         intent.putExtra("lokasi", contact.getLokasi());
+        intent.putExtra("lat", contact.getLat());
+        intent.putExtra("longg", contact.getLongg());
         startActivity(intent);
-//        Toast.makeText(this, ""+contact.getId_postingan()+contact.getNama(), Toast.LENGTH_SHORT).show();
     }
 
 

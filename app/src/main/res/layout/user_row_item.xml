@@ -9,6 +9,7 @@
     android:layout_marginHorizontal="25dp">
 
     <androidx.cardview.widget.CardView
+        app:cardElevation="7dp"
         android:layout_width="match_parent"
         android:layout_height="110dp"
         app:cardBackgroundColor="#F7F4F4"
@@ -74,7 +75,8 @@
                     <TextView
                         android:textColor="#FFC107"
                         android:layout_marginLeft="5dp"
-                        android:text="4.5"
+                        android:text="4.5666"
+                        android:maxLength="4"
                         android:id="@+id/ratingNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -39,6 +41,7 @@ public class KategoriFragment extends Fragment {
     View view;
     public HomePage intent;
     private String namaIntent;
+    ProgressBar loading;
 
 
     public KategoriFragment() {
@@ -54,6 +57,8 @@ public class KategoriFragment extends Fragment {
         intent = (HomePage) getActivity();
 
         namaIntent = intent.kategoriIntent;
+
+        loading = view.findViewById(R.id.loading);
 
 
         recyclerViewPostingan = view.findViewById(R.id.postingantRecyler);
@@ -85,7 +90,7 @@ public class KategoriFragment extends Fragment {
                                 JSONObject product = array.getJSONObject(i);
 
                                 //adding the product to product list
-                                if(namaIntent.equals(product.getString("id_kategori"))) {
+                                if(namaIntent.equals(product.getString("id_kategori")) && product.getString("status").equals("aktif")) {
                                     postinganList.add(new Postingan(
                                             product.getString("id_postingan"),
                                             product.getString("id_user"),
@@ -96,6 +101,10 @@ public class KategoriFragment extends Fragment {
                                             product.getString("berita"),
                                             product.getString("lokasi"),
                                             product.getString("tanggal_upload"),
+                                            product.getString("lat"),
+                                            product.getString("longg"),
+                                            product.getString("status"),
+                                            product.getString("notife"),
                                             product.getString("nilai_rating")
                                     ));
                                 }
@@ -105,6 +114,7 @@ public class KategoriFragment extends Fragment {
 
                             if (adapter != null){
                                 recyclerViewPostingan.setAdapter(adapter);
+                                loading.setVisibility(View.INVISIBLE);
 
                             }else {
                                 Toast.makeText(getActivity(), "null", Toast.LENGTH_SHORT).show();

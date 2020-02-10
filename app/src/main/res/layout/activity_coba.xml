@@ -178,13 +178,15 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:paddingHorizontal="10dp"
                         android:layout_marginRight="20dp"
+                        android:id="@+id/marker"
                         android:gravity="right"
                         android:textColor="#00BCD4"
                         android:layout_weight="1"
                         android:text="Lihat Arah"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="match_parent" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -193,20 +195,18 @@
                     android:layout_marginTop="5dp"
                     android:background="#b7b7b7"></LinearLayout>
 
-                <TextView
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="https://maps.app.google.gl/PoasdPSdbjasdA"
-                    android:id="@+id/lokasi"
-                    android:layout_marginTop="10dp"
-                    android:textColor="#2196F3" />
-
                 <fragment
                     android:name="com.google.android.gms.maps.SupportMapFragment"
                     android:id="@+id/map"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="https://maps.app.google.gl/PoasdPSdbjasdA"
+                    android:id="@+id/lokasi"
+                    android:layout_marginTop="10dp" />
 
             </LinearLayout>
             <TextView

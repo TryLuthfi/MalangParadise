@@ -12,10 +12,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+
+import java.math.BigInteger;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import malang.paradise.com.malangparadise.R;
@@ -23,6 +26,7 @@ import malang.paradise.com.malangparadise.inteface.UpdateProfileApi;
 import malang.paradise.com.malangparadise.json.Value;
 import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
 import malang.paradise.com.malangparadise.request.Utils;
+import malang.paradise.com.malangparadise.request.encryptMd5;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -35,11 +39,14 @@ public class EditProfile extends AppCompatActivity {
 
     String username,password,nama,id,image;
 
+    private String hasilmd5;
+
     CircleImageView imageProfile;
     EditText Ename,Eusername,Epassword;
     LinearLayout save;
     ImageView back,cancel;
     LinearLayout buttonOption,cancel_button;
+    TextView figuran;
 
     private ProgressDialog progressDialog;
 
@@ -63,6 +70,7 @@ public class EditProfile extends AppCompatActivity {
         cancel = findViewById(R.id.cancel);
         buttonOption = findViewById(R.id.buttonoption);
         cancel_button = findViewById(R.id.cancel_button);
+        figuran = findViewById(R.id.figuran);
 
         mPostKeyId = getIntent().getExtras().getString("id_userI");
         mPostkeyUsername = getIntent().getExtras().getString("usernameI");
@@ -95,7 +103,7 @@ public class EditProfile extends AppCompatActivity {
 
         Ename.setText(mPostKeyNama);
         Eusername.setText(mPostkeyUsername);
-        Epassword.setText(mPostKeyPassword);
+        figuran.setText(mPostKeyPassword);
 
         Eusername.addTextChangedListener(new TextWatcher() {
             @Override
@@ -161,6 +169,8 @@ public class EditProfile extends AppCompatActivity {
                 editProfile();
             }
         });
+
+        btnMD5();
     }
 
     private void dialog() {
@@ -268,5 +278,25 @@ public class EditProfile extends AppCompatActivity {
     private void showDialog() {
         if (!progressDialog.isShowing())
             progressDialog.show();
+    }
+
+    public void btnMD5(){
+        byte[] md5input = mPostKeyPassword.toString().getBytes();
+        BigInteger md5Data = null;
+
+        try{
+            md5Data =new BigInteger(1, encryptMd5.encryptMD5(md5input));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        String md5Str = md5Data.toString(16);
+        if(md5Str.length() < 32){
+            md5Str = 0 + md5Str;
+        }
+
+        hasilmd5 = md5Str;
+        Epassword.setText(hasilmd5);
+
     }
 }

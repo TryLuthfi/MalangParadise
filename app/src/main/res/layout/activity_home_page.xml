@@ -7,132 +7,159 @@
     android:background="#fff"
     tools:context=".activity.HomePage">
 
-    <LinearLayout
-        android:id="@+id/header"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/profile"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_weight="3"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:background="@drawable/user" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Malang"
-                android:fontFamily="@font/alatsi_regular"
-                android:textSize="24dp"
-                android:textColor="@color/colorBlue"
-                android:gravity="center"
-                android:layout_margin="4dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Paradise"
-                android:textSize="24dp"
-                android:fontFamily="@font/alatsi_regular"
-                android:textColor="@color/colorAccent"
-                android:layout_margin="4dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/search"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:background="@drawable/search" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
-
-        <ProgressBar
-            android:id="@+id/loading"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:indeterminate="true"
-            android:indeterminateTint="#a69393"
-            android:indeterminateTintMode="src_atop" />
-    </LinearLayout>
-
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/header">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/rcyclr"
+                android:id="@+id/header"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:background="@color/colorPrimary"
                 android:orientation="horizontal">
 
-                <HorizontalScrollView
+                <LinearLayout
+                    android:id="@+id/profile"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:scrollbars="none">
+                    android:layout_height="52dp"
+                    android:layout_weight="3"
+                    android:gravity="center">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/kategorirRecyclerView"
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:background="@drawable/user" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </HorizontalScrollView>
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:fontFamily="@font/alatsi_regular"
+                        android:gravity="center"
+                        android:text="Malang"
+                        android:textColor="@color/colorBlue"
+                        android:textSize="24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:fontFamily="@font/alatsi_regular"
+                        android:text="Paradise"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="24dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:background="@drawable/search" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/line"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@id/rcyclr"
-                android:background="#4B000000"
-                android:orientation="vertical"
-                android:visibility="invisible" />
+                android:layout_height="match_parent"
+                android:gravity="center">
 
-            <LinearLayout
+                <ProgressBar
+                    android:id="@+id/loading"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:indeterminate="true"
+                    android:indeterminateTint="#a69393"
+                    android:indeterminateTintMode="src_atop" />
+            </LinearLayout>
+
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/line"
-                android:orientation="vertical">
+                android:layout_below="@id/header">
 
-                <FrameLayout
-                    android:id="@+id/frame_container"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+                    <LinearLayout
+                        android:id="@+id/rcyclr"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/kategorirRecyclerView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </HorizontalScrollView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/line"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/rcyclr"
+                        android:background="#4B000000"
+                        android:orientation="vertical"
+                        android:visibility="invisible" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/line"
+                        android:orientation="vertical">
+
+                        <FrameLayout
+                            android:id="@+id/frame_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </RelativeLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/tambah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="25dp"
+        android:src="@drawable/plus"
+        android:background="@drawable/plus"
+        app:fabSize="auto"
+        />
 
 </RelativeLayout>

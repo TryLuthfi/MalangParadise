@@ -78,11 +78,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder>
             Glide.with(context).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQiZSMtcZ3iQz-C09z2XAkYukrdsxrXRvrRl6myil68joLMHUM").into(holder.gambar);
         }else {
             Glide.with(context)
-                    .load("http://malang-paradise.000webhostapp.com/" + contact.getGambar())
+                    .load("https://malang-paradise.000webhostapp.com/" + contact.getGambar())
                     .into(holder.gambar);
         }
-        holder.rate.setRating(contact.getNilai_rating());
-        holder.ratingNumber.setText(Float.toString(contact.getNilai_rating()));
+        holder.ratingNumber.setText(contact.getNilai_rating());
+//        holder.rate.setRating(Float.parseFloat(contact.getNilai_rating().trim()));
     }
 
     @Override

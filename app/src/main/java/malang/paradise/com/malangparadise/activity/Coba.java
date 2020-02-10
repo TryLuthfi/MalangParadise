@@ -75,15 +75,16 @@ public class Coba extends FragmentActivity  implements OnMapReadyCallback,
 
     private GoogleMap mMap;
     private String mPostKeyNama = null, mPostKeyGambar = null, mPostKeyBerita = null
-            , mPostKeyLokasi = null, mPostKeyIdPostingan = null;
-    private float mPostKeyRating;
-    private String mPostKeyRating2;
+            , mPostKeyLokasi = null, mPostKeyIdPostingan = null, mPostKeyLat = null, mPostKeyLong = null;
+    private String mPostKeyRating;
     private CollapsingToolbarLayout collapsingToolbar;
     private ImageView iv_header;
     private ImageView bintangIcon;
     private TextView berita;
     private TextView rating;
     private TextView lokasi;
+
+    private Double latD, longD;
 
     private static final int PERMISSION_REQUEST_CODE = 7001;
     private static final int PLAY_SERVICE_REQUEST = 7002;
@@ -103,6 +104,7 @@ public class Coba extends FragmentActivity  implements OnMapReadyCallback,
     private static final int UPDATE_INTERVAL = 5000;//5 detik
     private static final int FASTEST_INTERVAL = 3000;//3detik
     private static final int DISPLACEMENT = 10;
+    private TextView marker;
 
     private AppCompatRatingBar rate;
 
@@ -122,6 +124,7 @@ public class Coba extends FragmentActivity  implements OnMapReadyCallback,
         berita = findViewById(R.id.berita);
         rating = findViewById(R.id.rating);
         lokasi = findViewById(R.id.lokasi);
+        marker = findViewById(R.id.marker);
         bintangIcon = findViewById(R.id.bintangIcon);
         iv_header = findViewById(R.id.iv_header);
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
@@ -136,26 +139,26 @@ public class Coba extends FragmentActivity  implements OnMapReadyCallback,
         mPostKeyNama = getIntent().getExtras().getString("nama");
         mPostKeyGambar = getIntent().getExtras().getString("gambar");
         mPostKeyBerita = getIntent().getExtras().getString("berita");
-        mPostKeyRating = getIntent().getExtras().getFloat("rating");
-        mPostKeyRating2 = getIntent().getExtras().getString("rating2");
+        mPostKeyRating = getIntent().getExtras().getString("rating");
         mPostKeyLokasi = getIntent().getExtras().getString("lokasi");
+        mPostKeyLat = getIntent().getExtras().getString("lat");
+        mPostKeyLong = getIntent().getExtras().getString("longg");
 
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background);
 
         berita.setText("    "+mPostKeyBerita);
-        lokasi.setText(mPostKeyLokasi);
+        lokasi.setText("    "+mPostKeyLokasi);
 
-        if(mPostKeyRating2.equals("null")){
+        if(mPostKeyRating.equals("null")){
             rating.setText("0.0");
             bintangIcon.setImageDrawable(ContextCompat.getDrawable(Coba.this, R.drawable.starnull));
         }else {
             bintangIcon.setImageDrawable(ContextCompat.getDrawable(Coba.this, R.drawable.stars));
-            rating.setText(mPostKeyRating2);
+            rating.setText(mPostKeyRating);
         }
         collapsingToolbar.setTitle(mPostKeyNama);
         collapsingToolbar.setCollapsedTitleTextColor(getResources().getColor(R.color.colorBlack));
-//        Glide.with(Objects.requireNonNull(mCtx)).load("https://malang-paradise.000webhostapp.com/" + mPostKeyGambar).apply(requestOptions).into(iv_header);
         Glide.with(Objects.requireNonNull(getApplicationContext())).load("https://malang-paradise.000webhostapp.com/" + mPostKeyGambar).apply(requestOptions).into(iv_header);
 
         LinearLayoutManager layoutManager
@@ -224,7 +227,7 @@ public class Coba extends FragmentActivity  implements OnMapReadyCallback,
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
 
         googleMap.setOnMarkerClickListener(this);
@@ -246,14 +249,35 @@ public class Coba extends FragmentActivity  implements OnMapReadyCallback,
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setTiltGesturesEnabled(true);
 
-        LatLng sydney = new LatLng(-7.9789705, 112.6315727);
+        marker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                latD = Double.parseDouble(mPostKeyLat);
+                longD = Double.parseDouble(mPostKeyLong);
+                LatLng sydney = new LatLng(latD, longD);
+                mMap.addMarker(new MarkerOptions().position(sydney).title(""+mPostKeyNama));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(10).build();
+                cameraPosition = new CameraPosition.Builder()
+                        .target(sydney)
+                        .zoom(16)
+                        .tilt(15)
+                        .build();
+                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            }
+        });
+
+        latD = Double.parseDouble(mPostKeyLat);
+        longD = Double.parseDouble(mPostKeyLong);
+        LatLng sydney = new LatLng(latD, longD);
         mMap.addMarker(new MarkerOptions().position(sydney).title(""+mPostKeyNama));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(10).build();
         cameraPosition = new CameraPosition.Builder()
                 .target(sydney)
-                .zoom(16)
+                .zoom(10)
                 .tilt(15)
                 .build();
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
@@ -391,7 +415,7 @@ public class Coba extends FragmentActivity  implements OnMapReadyCallback,
         ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
         try {
             jsonObject = new JSONObject(JSON_STRING);
-            JSONArray result = jsonObject.getJSONArray(konfigurasi.TAG_JSON_ARRAY);
+            JSONArray result = jsonObject.getJSONArray(konfigurasi.TAG_JSON_ARRAY_RATING);
 
             for (int i = 0 ; i < result.length(); i++){
                 JSONObject jo = result.getJSONObject(i);
@@ -406,7 +430,7 @@ public class Coba extends FragmentActivity  implements OnMapReadyCallback,
 
                 if(id_userr.equals(id_user) && id_postingan.equals(mPostKeyIdPostingan)){
                     rate.setRating(Float.parseFloat(""+nilai_rating));
-                    Toast.makeText(this, ""+nilai_rating, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this, ""+nilai_rating, Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
 

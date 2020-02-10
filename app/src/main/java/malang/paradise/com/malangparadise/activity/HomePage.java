@@ -1,5 +1,6 @@
 package malang.paradise.com.malangparadise.activity;
 
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import malang.paradise.com.malangparadise.R;
 import malang.paradise.com.malangparadise.adapter.KategoriAdapter;
 import malang.paradise.com.malangparadise.fragment.AllFragment;
@@ -32,6 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,6 +60,8 @@ public class HomePage extends AppCompatActivity implements RecyclerViewListClick
     private LinearLayout profile;
     private LinearLayout line;
     private LinearLayout search;
+    private FloatingActionButton tambah;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,24 @@ public class HomePage extends AppCompatActivity implements RecyclerViewListClick
         profile = findViewById(R.id.profile);
         search = findViewById(R.id.search);
         line = findViewById(R.id.line);
+        tambah = findViewById(R.id.tambah);
+
+        swipeRefreshLayout = findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                getJSON();
+            }
+        });
+
+        tambah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (getApplicationContext(), AddPostingan.class);
+                startActivity(intent);
+            }
+        });
 
         getJSON();
 
@@ -85,11 +107,7 @@ public class HomePage extends AppCompatActivity implements RecyclerViewListClick
 
         kategoriList = new ArrayList<>();
 
-        FragmentManager fm =  getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
 
-        fragmentTransaction.add(R.id.frame_container, new AllFragment());
-        fragmentTransaction.commit();
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -234,6 +252,14 @@ public class HomePage extends AppCompatActivity implements RecyclerViewListClick
 
                                 loading.setVisibility(View.INVISIBLE);
                                 line.setVisibility(View.VISIBLE);
+
+                                swipeRefreshLayout.setRefreshing(false);
+
+                                FragmentManager fm =  getSupportFragmentManager();
+                                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+
+                                fragmentTransaction.add(R.id.frame_container, new AllFragment());
+                                fragmentTransaction.commit();
                             }else {
                                 Toast.makeText(getApplicationContext(), "null", Toast.LENGTH_SHORT).show();
                             }
