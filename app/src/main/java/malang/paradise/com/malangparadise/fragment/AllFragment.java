@@ -94,7 +94,7 @@ public class AllFragment extends Fragment {
                                             product.getString("lokasi"),
                                             product.getString("tanggal_upload"),
                                             product.getString("lat"),
-                                            product.getString("longg"),
+                                            product.getString("lng"),
                                             product.getString("status"),
                                             product.getString("notife"),
                                             product.getString("nilai_rating")

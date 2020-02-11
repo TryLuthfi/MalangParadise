@@ -18,7 +18,6 @@ import java.util.Objects;
 
 import malang.paradise.com.malangparadise.R;
 import malang.paradise.com.malangparadise.activity.Coba;
-import malang.paradise.com.malangparadise.activity.DetailPostingan;
 import malang.paradise.com.malangparadise.json.Postingan;
 
 public class SemuaPostinganAdapter extends RecyclerView.Adapter<SemuaPostinganAdapter.ProductViewHolder>{
@@ -64,7 +63,7 @@ public class SemuaPostinganAdapter extends RecyclerView.Adapter<SemuaPostinganAd
                 intent.putExtra("rating2", postingan.getNilai_rating());
                 intent.putExtra("lokasi", postingan.getLokasi());
                 intent.putExtra("lat", postingan.getLat());
-                intent.putExtra("longg", postingan.getLongg());
+                intent.putExtra("longg", postingan.getLng());
                 mCtx.startActivity(intent);
             }
         });

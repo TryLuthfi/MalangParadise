@@ -1,6 +1,7 @@
 package malang.paradise.com.malangparadise.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -22,7 +23,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -60,19 +63,30 @@ public class AddPostingan extends AppCompatActivity {
     private String ConvertImage;
     private Context mCtx;
 
+    String lat, longg;
+
     public String selectedItemText;
 
+    private final static int MY_REQUEST_CODE = 1;
 
     private EditText nama;
     private EditText berita;
-    private EditText lokasi;
+    private TextView lokasi;
     private ImageView image_view;
     private Button image_choose;
+    private Button pick_location;
     private CardView simpan;
     String id_user;
     int id_kategori = 0;
     String nama_kategori = null;
     private Spinner kategori_spinner;
+    String lokasiS;
+
+    String latAkhir, longAkhir;
+
+    String[] separated, separated2;
+
+    private LinearLayout lokasiss;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +99,8 @@ public class AddPostingan extends AppCompatActivity {
         image_view = findViewById(R.id.view_image);
         id_user = getId_user();
         image_choose = findViewById(R.id.choose_image);
+        lokasiss = findViewById(R.id.lokasiss);
+        pick_location = findViewById(R.id.pickLocation);
         kategori_spinner = findViewById(R.id.kategori_spinner);
 
         String [] countries ={"PILIH KATEGORI","Pendakian","Pemandian","Edukasi","Makanan"};
@@ -97,19 +113,19 @@ public class AddPostingan extends AppCompatActivity {
                 selectedItemText = (String) parent.getItemAtPosition(position);
 
                 if(selectedItemText.equals("PILIH CHAPTER")){
-                    id_kategori = 0;
+                    id_kategori = 1;
                 } else if(selectedItemText.equals("Pendakian")){
                     nama_kategori = "pendakian";
-                    id_kategori = 1;
+                    id_kategori = 2;
                 } else if(selectedItemText.equals("Pemandian")){
                     nama_kategori = "pemandian";
-                    id_kategori = 2;
+                    id_kategori = 3;
                 } else if(selectedItemText.equals("Edukasi")) {
                     nama_kategori = "edukasi";
-                    id_kategori = 3;
+                    id_kategori = 4;
                 } else if(selectedItemText.equals("Makanan")) {
                     nama_kategori = "makanan";
-                    id_kategori = 4;
+                    id_kategori = 5;
                 }
             }
 
@@ -136,6 +152,13 @@ public class AddPostingan extends AppCompatActivity {
                 openGallery();
             }
         });
+        pick_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PickLocation.class);
+                startActivityForResult(intent, MY_REQUEST_CODE);
+            }
+        });
         simpan = findViewById(R.id.simpan);
 
         simpan.setOnClickListener(new View.OnClickListener() {
@@ -143,7 +166,6 @@ public class AddPostingan extends AppCompatActivity {
             public void onClick(View v) {
                 final String beritaS = berita.getText().toString().trim();
                 final String namaS = nama.getText().toString().trim();
-                final String lokasiS = lokasi.getText().toString().trim();
 
                 if (namaS.isEmpty()) {
                     nama.setError("Nama Tidak Boleh Kosong");
@@ -162,7 +184,7 @@ public class AddPostingan extends AppCompatActivity {
                         byteArray = byteArrayOutputStream.toByteArray();
                         ConvertImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
-//                        Toast.makeText(AddPostingan.this, id_user+","+id_kategori+","+nama_kategori+","+f.getName()+","+ConvertImage+","+namaS+","+beritaS+","+lokasiS, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(AddPostingan.this, id_user+","+id_kategori+","+nama_kategori+","+f.getName()+","+namaS+","+beritaS+","+lokasiS+","+latAkhir+","+longAkhir, Toast.LENGTH_SHORT).show();
 
                         class Upload extends AsyncTask<Void, Void, String> {
 
@@ -179,6 +201,7 @@ public class AddPostingan extends AppCompatActivity {
                                 super.onPostExecute(s);
                                 loading.dismiss();
                                 Toast.makeText(AddPostingan.this, s, Toast.LENGTH_LONG).show();
+                                finish();
                             }
 
                             @Override
@@ -194,6 +217,8 @@ public class AddPostingan extends AppCompatActivity {
                                 params.put("nama", namaS);
                                 params.put("berita", beritaS);
                                 params.put("lokasi", lokasiS);
+                                params.put("lat", latAkhir);
+                                params.put("lng", longAkhir);
 
                                 RequestHandler rh = new RequestHandler();
                                 String res = rh.sendPostRequest(konfigurasi.URL_POST_POSTINGAN, params);
@@ -247,6 +272,29 @@ public class AddPostingan extends AppCompatActivity {
                     Toast.makeText(AddPostingan.this, "Failed!", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        }
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == MY_REQUEST_CODE) {
+                if (data != null)
+                    lokasi.setText(data.getStringExtra("nama"));
+                    lokasiss.setVisibility(View.VISIBLE);
+                assert data != null;
+                lokasiS = data.getStringExtra("address");
+
+                separated = data.getStringExtra("latlng").trim().split(",");
+                separated2 = separated[0].trim().split(":");
+
+                lat = ""+separated2[1];
+                longg = ""+separated[1];
+
+                latAkhir = lat.substring(2);
+                longAkhir = longg.replaceFirst(".$","");
+
+
+
+//                lokasi.setText(latAkhir+"||"+longAkhir);
             }
         }
     }

@@ -75,6 +75,8 @@ public class HomePage extends AppCompatActivity implements RecyclerViewListClick
         line = findViewById(R.id.line);
         tambah = findViewById(R.id.tambah);
 
+        tambah.setImageResource(R.drawable.plus);
+
         swipeRefreshLayout = findViewById(R.id.swipe);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

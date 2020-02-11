@@ -150,7 +150,7 @@ public class EditProfile extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 back.setVisibility(View.GONE);
                 cancel.setVisibility(View.VISIBLE);
-                buttonOption.setVisibility(View.VISIBLE);
+//                buttonOption.setVisibility(View.VISIBLE);
             }
 
             @Override

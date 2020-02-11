@@ -249,10 +249,11 @@ public class Coba extends FragmentActivity  implements OnMapReadyCallback,
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setTiltGesturesEnabled(true);
 
+        final String[] separated = mPostKeyLat.split("\\(");
         marker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                latD = Double.parseDouble(mPostKeyLat);
+                latD = Double.parseDouble(separated[1]);
                 longD = Double.parseDouble(mPostKeyLong);
                 LatLng sydney = new LatLng(latD, longD);
                 mMap.addMarker(new MarkerOptions().position(sydney).title(""+mPostKeyNama));
@@ -261,7 +262,7 @@ public class Coba extends FragmentActivity  implements OnMapReadyCallback,
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(10).build();
                 cameraPosition = new CameraPosition.Builder()
                         .target(sydney)
-                        .zoom(16)
+                        .zoom(14)
                         .tilt(15)
                         .build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
@@ -272,12 +273,11 @@ public class Coba extends FragmentActivity  implements OnMapReadyCallback,
         longD = Double.parseDouble(mPostKeyLong);
         LatLng sydney = new LatLng(latD, longD);
         mMap.addMarker(new MarkerOptions().position(sydney).title(""+mPostKeyNama));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
         CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(10).build();
         cameraPosition = new CameraPosition.Builder()
                 .target(sydney)
-                .zoom(10)
+                .zoom(14)
                 .tilt(15)
                 .build();
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));

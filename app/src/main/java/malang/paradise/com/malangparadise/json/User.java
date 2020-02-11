@@ -12,7 +12,9 @@ public class User {
      String lokasi;
      String tanggal_upload;
      String lat;
-     String longg;
+     String lng;
+     String status;
+     String notife;
      String nilai_rating;
 
     public User(){
@@ -60,9 +62,13 @@ public class User {
         return lat;
     }
 
-    public String getLongg() {
-        return longg;
+    public String getLng() {
+        return lng;
     }
+
+    public String getStatus(){return status;}
+
+    public String getNotife(){return notife;}
 
     public String getNilai_rating() {return nilai_rating;}
 }

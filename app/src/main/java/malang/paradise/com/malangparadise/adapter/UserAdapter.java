@@ -27,6 +27,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder>
     private List<User> contactListFiltered;
     private ContactsAdapterListener listener;
 
+    private String nilai_rating;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView nama, berita, ratingNumber;
@@ -71,6 +72,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder>
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final User contact = contactListFiltered.get(position);
+
+
         holder.nama.setText(contact.getNama());
         holder.berita.setText(contact.getBerita());
 

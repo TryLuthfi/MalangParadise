@@ -208,7 +208,7 @@ public class SearchActivity extends AppCompatActivity implements UserAdapter.Con
         intent.putExtra("rating2", contact.getNilai_rating());
         intent.putExtra("lokasi", contact.getLokasi());
         intent.putExtra("lat", contact.getLat());
-        intent.putExtra("longg", contact.getLongg());
+        intent.putExtra("longg", contact.getLng());
         startActivity(intent);
     }
 

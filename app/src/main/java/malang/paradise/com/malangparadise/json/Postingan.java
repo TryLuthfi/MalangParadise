@@ -11,12 +11,12 @@ public class Postingan {
     private String lokasi;
     private String tanggal_upload;
     private String lat;
-    private String longg;
+    private String lng;
     private String status;
     private String notife;
     private String nilai_rating;
 
-    public Postingan(String id_postingan, String id_user, String id_kategori, String id_gambar, String gambar,String nama, String berita, String lokasi, String tanggal_upload,String lat, String longg,String status, String notife, String nilai_rating) {
+    public Postingan(String id_postingan, String id_user, String id_kategori, String id_gambar, String gambar,String nama, String berita, String lokasi, String tanggal_upload,String lat, String lng,String status, String notife, String nilai_rating) {
         this.id_postingan = id_postingan;
         this.id_user = id_user;
         this.id_kategori = id_kategori;
@@ -27,7 +27,7 @@ public class Postingan {
         this.lokasi = lokasi;
         this.tanggal_upload = tanggal_upload;
         this.lat = lat;
-        this.longg = longg;
+        this.lng = lng;
         this.status = status;
         this.notife = notife;
         this.nilai_rating = nilai_rating;
@@ -73,8 +73,8 @@ public class Postingan {
         return lat;
     }
 
-    public String getLongg(){
-        return longg;
+    public String getLng(){
+        return lng;
     }
 
     public String getStatus(){return status;}

@@ -15,10 +15,12 @@
         tools:replace="android:appComponentFactory">
 
         <activity
-            android:name=".activity.Coba"
-            android:label="@string/title_activity_coba">
-        </activity>
+            android:name=".activity.PickLocation"
+            android:label="@string/title_activity_pick_location"></activity>
 
+        <activity
+            android:name=".activity.Coba"
+            android:label="@string/title_activity_coba"></activity>
         <activity
             android:name=".activity.SearchActivity"
             android:label="SearchActivity"
@@ -31,29 +33,28 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".activity.DetailPostingan" />
         <activity android:name=".activity.Register" />
         <activity android:name=".activity.EditProfile" />
         <activity android:name=".activity.HomePage" />
         <activity android:name=".activity.Login" />
         <activity android:name=".activity.Profile" />
-        <activity android:name=".activity.getStarted" >
+        <activity android:name=".activity.AddPostingan" />
+        <activity android:name=".activity.getStarted">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
     </application>
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>
