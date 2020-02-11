@@ -197,6 +197,9 @@ public class Coba extends FragmentActivity  implements OnMapReadyCallback,
                             protected void onPostExecute(String s) {
                                 super.onPostExecute(s);
                                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+                                if(s.equals("Berhasil Update") || s.equals("Berhasil")){
+                                    dialog.dismiss();
+                                }
                                 Log.d(TAG, "onPostExecute: " + s);
                             }
 

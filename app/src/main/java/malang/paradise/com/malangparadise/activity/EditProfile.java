@@ -5,9 +5,12 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,12 +22,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.math.BigInteger;
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import malang.paradise.com.malangparadise.R;
 import malang.paradise.com.malangparadise.inteface.UpdateProfileApi;
 import malang.paradise.com.malangparadise.json.Value;
 import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
+import malang.paradise.com.malangparadise.request.RequestHandler;
 import malang.paradise.com.malangparadise.request.Utils;
 import malang.paradise.com.malangparadise.request.encryptMd5;
 import retrofit2.Call;
@@ -42,7 +47,7 @@ public class EditProfile extends AppCompatActivity {
     private String hasilmd5;
 
     CircleImageView imageProfile;
-    EditText Ename,Eusername,Epassword;
+    EditText Ename,Eusername,Epassword,Enew_password;
     LinearLayout save;
     ImageView back,cancel;
     LinearLayout buttonOption,cancel_button;
@@ -71,6 +76,7 @@ public class EditProfile extends AppCompatActivity {
         buttonOption = findViewById(R.id.buttonoption);
         cancel_button = findViewById(R.id.cancel_button);
         figuran = findViewById(R.id.figuran);
+        Enew_password = findViewById(R.id.new_password);
 
         mPostKeyId = getIntent().getExtras().getString("id_userI");
         mPostkeyUsername = getIntent().getExtras().getString("usernameI");
@@ -103,7 +109,9 @@ public class EditProfile extends AppCompatActivity {
 
         Ename.setText(mPostKeyNama);
         Eusername.setText(mPostkeyUsername);
-        figuran.setText(mPostKeyPassword);
+//        figuran.setText(mPostKeyPassword);
+        Epassword.setText("");
+        Enew_password.setText("");
 
         Eusername.addTextChangedListener(new TextWatcher() {
             @Override
@@ -166,11 +174,49 @@ public class EditProfile extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editProfile();
+//                editProfile();
+                edit_profile();
             }
         });
 
-        btnMD5();
+//        btnMD5();
+    }
+
+    private void edit_profile() {
+        class UpdateData extends AsyncTask<Void,Void,String>{
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
+                if(s.equals("Berhasil Update")){
+                    Intent intent = new Intent(getApplicationContext(),HomePage.class);
+                    startActivity(intent);
+                }
+//                Log.d(TAG, "onPostExecute: " + s);
+            }
+
+            @Override
+            protected String doInBackground(Void... v) {
+                HashMap<String, String> params = new HashMap<>();
+                params.put("id_user", mPostKeyId);
+                params.put("username", Eusername.getText().toString() );
+                params.put("nama", Ename.getText().toString());
+                params.put("password", Epassword.getText().toString());
+                params.put("new_password", Enew_password.getText().toString());
+
+                RequestHandler rh = new RequestHandler();
+                String res = rh.sendPostRequest(konfigurasi.URL_NEW_EDIT, params);
+                return res;
+            }
+        }
+        UpdateData ae = new UpdateData();
+        ae.execute();
     }
 
     private void dialog() {
@@ -280,23 +326,23 @@ public class EditProfile extends AppCompatActivity {
             progressDialog.show();
     }
 
-    public void btnMD5(){
-        byte[] md5input = mPostKeyPassword.toString().getBytes();
-        BigInteger md5Data = null;
-
-        try{
-            md5Data =new BigInteger(1, encryptMd5.encryptMD5(md5input));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        String md5Str = md5Data.toString(16);
-        if(md5Str.length() < 32){
-            md5Str = 0 + md5Str;
-        }
-
-        hasilmd5 = md5Str;
-        Epassword.setText(hasilmd5);
-
-    }
+//    public void btnMD5(){
+//        byte[] md5input = mPostKeyPassword.toString().getBytes();
+//        BigInteger md5Data = null;
+//
+//        try{
+//            md5Data =new BigInteger(1, encryptMd5.encryptMD5(md5input));
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        String md5Str = md5Data.toString(16);
+//        if(md5Str.length() < 32){
+//            md5Str = 0 + md5Str;
+//        }
+//
+//        hasilmd5 = md5Str;
+//        Epassword.setText(hasilmd5);
+//
+//    }
 }
