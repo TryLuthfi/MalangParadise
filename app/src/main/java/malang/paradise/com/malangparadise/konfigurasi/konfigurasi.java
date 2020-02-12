@@ -6,7 +6,7 @@ public class konfigurasi {
     public static final String KEY_NAMA = "nama";
     public static final String LOGIN_SUCCESS = "success";
 
-    public static final String PROFILE_IMAGE_URL = "http://malang-paradise.000webhostapp.com/Profile%20Image/";
+    public static final String PROFILE_IMAGE_URL = "https://malang-paradise.000webhostapp.com/Profile%20Image/";
     public static final String LOGIN_URL = "https://malang-paradise.000webhostapp.com/login.php";
     public static final String URL_GET_DATAUSER = "https://malang-paradise.000webhostapp.com/datauser.php";
     public static final String URL_GET_DATARATING = "https://malang-paradise.000webhostapp.com/datarating.php";
