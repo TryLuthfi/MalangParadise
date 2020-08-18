@@ -1,26 +1,10 @@
 package malang.paradise.com.malangparadise.activity;
 
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import malang.paradise.com.malangparadise.R;
-import malang.paradise.com.malangparadise.adapter.KategoriAdapter;
-import malang.paradise.com.malangparadise.fragment.AllFragment;
-import malang.paradise.com.malangparadise.fragment.KategoriFragment;
-import malang.paradise.com.malangparadise.inteface.RecyclerViewListClicked;
-import malang.paradise.com.malangparadise.json.Kategori;
-import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
-import malang.paradise.com.malangparadise.request.RequestHandler;
-import malang.paradise.com.malangparadise.request.Utils;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -43,6 +27,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import malang.paradise.com.malangparadise.R;
+import malang.paradise.com.malangparadise.adapter.KategoriAdapter;
+import malang.paradise.com.malangparadise.fragment.AllFragment;
+import malang.paradise.com.malangparadise.fragment.KategoriFragment;
+import malang.paradise.com.malangparadise.inteface.RecyclerViewListClicked;
+import malang.paradise.com.malangparadise.json.Kategori;
+import malang.paradise.com.malangparadise.konfigurasi.konfigurasi;
+import malang.paradise.com.malangparadise.request.RequestHandler;
+import malang.paradise.com.malangparadise.request.Utils;
 
 public class HomePage extends AppCompatActivity implements RecyclerViewListClicked {
     List<Kategori> kategoriList;
@@ -257,7 +257,7 @@ public class HomePage extends AppCompatActivity implements RecyclerViewListClick
 
                                 swipeRefreshLayout.setRefreshing(false);
 
-                                FragmentManager fm =  getSupportFragmentManager();
+                                FragmentManager fm =  getSupportFragmentManager();                  
                                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
 
                                 fragmentTransaction.add(R.id.frame_container, new AllFragment());
@@ -289,6 +289,7 @@ public class HomePage extends AppCompatActivity implements RecyclerViewListClick
         String id_user = preferences.getString("id_user", "null");
         return id_user;
     }
+
 
     @Override
     public void recyclerViewListClicked(View v, int position) {
